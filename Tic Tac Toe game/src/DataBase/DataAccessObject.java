@@ -34,8 +34,16 @@ public class DataAccessObject {
     }
     
     public static int addUser(UserData user) throws SQLException {
-        
-        return 0;
+        int result = 0;
+        String sqlStat = "insert into UserData values(?, ?, ?, ?, 0, false, false)";
+        PreparedStatement pst = con.prepareStatement(sqlStat);
+        pst.setInt(1, getNextID());
+        pst.setString(2, user.getName());
+        pst.setString(3, user.getEmail());
+        pst.setString(4, user.getPassword());
+        result = pst.executeUpdate();
+        pst.close();
+        return result;
     }
     
     public static UserData getUser(String email, String password) throws SQLException {
