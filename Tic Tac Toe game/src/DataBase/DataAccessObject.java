@@ -66,7 +66,16 @@ public class DataAccessObject {
     
     public static int updateStatus(UserData user) throws SQLException {
         
-        return 0;
+        int result = 0;
+        String sqlStat = "update userdata set is_available = ?, is_ongame = ? where id = ?";
+        PreparedStatement pst = con.prepareStatement(sqlStat);
+        pst.setBoolean(1 , user.getIs_available());
+        pst.setBoolean(2 , user.getIs_onGame());
+        pst.setInt(3 , user.getId());
+        result = pst.executeUpdate();
+        pst.close();
+        
+        return result;
     }
     
     public static void stop() throws SQLException {
