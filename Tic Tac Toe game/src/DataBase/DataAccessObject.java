@@ -47,8 +47,19 @@ public class DataAccessObject {
     }
     
     public static UserData getUser(String email, String password) throws SQLException {
+       UserData user = null;
+       PreparedStatement pst = con.prepareStatement("select * from UserData where email = ? and password=?");
+       pst.setString(1, email);
+       pst.setString(2, password);
+       ResultSet rs = pst.executeQuery();
+       if (rs.next()) {
+		user = new UserData(rs.getInt(1),rs.getString(2),rs.getString(3),
+		rs.getString(4),rs.getLong(7),rs.getBoolean(5),rs.getBoolean(6) );
+       }
+       pst.close();
+       return user ;
         
-        return null;
+        
     }
     
     public static int getNextID() throws SQLException {
@@ -68,13 +79,29 @@ public class DataAccessObject {
     }
     
     public static int updateScore(UserData user) throws SQLException {
-        
-        return 0;
+       int result = 0;
+        user.updateScore();
+        String sqlStat = "update userdata set score = ? where id = ?";
+        PreparedStatement pst = con.prepareStatement(sqlStat);
+        pst.setLong(1 , user.getScore());
+        pst.setInt(2 , user.getId());
+        result = pst.executeUpdate();
+        pst.close();
+        return result;
     }
     
     public static int updateStatus(UserData user) throws SQLException {
         
-        return 0;
+        int result = 0;
+        String sqlStat = "update userdata set is_available = ?, is_ongame = ? where id = ?";
+        PreparedStatement pst = con.prepareStatement(sqlStat);
+        pst.setBoolean(1 , user.getIs_available());
+        pst.setBoolean(2 , user.getIs_onGame());
+        pst.setInt(3 , user.getId());
+        result = pst.executeUpdate();
+        pst.close();
+        
+        return result;
     }
     
     public static void stop() throws SQLException {
