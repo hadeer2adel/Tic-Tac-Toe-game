@@ -39,8 +39,19 @@ public class DataAccessObject {
     }
     
     public static UserData getUser(String email, String password) throws SQLException {
+       UserData user = null;
+       PreparedStatement pst = con.prepareStatement("select * from UserData where email = ? and password=?");
+       pst.setString(1, email);
+       pst.setString(2, password);
+       ResultSet rs = pst.executeQuery();
+       if (rs.next()) {
+		user = new UserData(rs.getInt(1),rs.getString(2),rs.getString(3),
+		rs.getString(4),rs.getLong(7),rs.getBoolean(5),rs.getBoolean(6) );
+       }
+       pst.close();
+       return user ;
         
-        return null;
+        
     }
     
     public static int getNextID() throws SQLException {
