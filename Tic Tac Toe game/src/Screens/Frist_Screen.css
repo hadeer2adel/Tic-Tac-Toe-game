@@ -5,3 +5,8 @@
 .mainFxmlClass {
 
 }
+.btn_play{
+    
+    -fx-background-color: #FCD015 ;
+    -fx-background-radius: 20 ;
+}
