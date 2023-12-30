@@ -5,3 +5,14 @@
 .mainFxmlClass {
 
 }
+.linearBg
+{
+    -fx-fill: linear-gradient(to bottom, #1D11A0, #150D73);
+    -fx-background-radius: 40 ;
+    
+}
+.btn{
+    
+    -fx-background-color: #FCD015 ;
+    -fx-background-radius: 10 ;
+}
