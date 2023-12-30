@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screens.TwoPlayerMode_ScreenController">
-    <stylesheets>
-        <URL value="@TwoPlayerMode_Screen.css"/>
-    </stylesheets>
-</AnchorPane>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@TwoPlayerMode_Screen.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #3D7AD5;" stylesheets="@TwoPlayerMode_Screen.css">
+         <children>
+            <ImageView fx:id="Imag3" fitHeight="104.0" fitWidth="97.0" layoutX="90.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/vecteezy_anime-cute-girl_11483095-modified%201.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnBack" layoutX="52.0" layoutY="345.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="76.0" styleClass="btn_back" text="Back" textFill="#121111">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnLetPlay" layoutX="450.0" layoutY="345.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="139.0" styleClass="btn_let" text="let's play" textFill="#121111">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Button>
+            <TextField fx:id="txtField1" layoutX="214.0" layoutY="149.0" prefHeight="33.0" prefWidth="241.0" promptText="    Player1_name" style="-fx-background-color: #3D7AD6;" styleClass="txtFieldPlayer1">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtField2" layoutX="211.0" layoutY="269.0" prefHeight="22.0" prefWidth="247.0" promptText="   Player2_name" style="-fx-background-color: #3D7AD6;" styleClass="txtFieldPlayer2">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+            </TextField>
+            <ImageView fx:id="Imag2" fitHeight="113.0" fitWidth="97.0" layoutX="90.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/vecteezy_anime-boy-avatar-isolated_11484425%201.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Imag1" fitHeight="125.0" fitWidth="280.0" layoutX="165.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/img2-removebg-preview%20(1).png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

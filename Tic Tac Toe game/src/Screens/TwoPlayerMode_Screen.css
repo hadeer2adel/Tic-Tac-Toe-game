@@ -1,7 +1,29 @@
-/*
- * Empty Stylesheet file.
- */
+
 
 .mainFxmlClass {
 
+}
+.bkground_color{
+    -fx-fill: radial-gradient(focus-distance 0% , center 50% 50% , radius 100% , skyblue, blue);
+}
+.btn_back{
+    -fx-background-color: #FCD015;
+    -fx-background-radius: 20px;
+    
+}
+.btn_let{
+    
+    -fx-background-color: #FCD015;
+    -fx-background-radius: 20px;
+    
+}
+.txtFieldPlayer1{
+    -fx-border-color: white;
+    -fx-border-radius:20px;
+}
+.txtFieldPlayer2{
+    
+    -fx-border-color: white;
+    -fx-border-radius: 20px;
+    
 }
