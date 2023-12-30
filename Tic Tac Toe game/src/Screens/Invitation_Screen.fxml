@@ -1,14 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screens.Invitation_ScreenController">
-    <stylesheets>
-        <URL value="@Invitation_Screen.css"/>
-    </stylesheets>
-</AnchorPane>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #3D7AD5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="194.0" prefWidth="538.0" style="-fx-background-color: #FFFDFD; -fx-background-radius: 10px;" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3d7ad5" height="74.0" stroke="BLACK" strokeType="INSIDE" width="513.0">
+               <StackPane.margin>
+                  <Insets bottom="90.0" />
+               </StackPane.margin>
+            </Rectangle>
+            <Circle fill="#1fff36" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+               <StackPane.margin>
+                  <Insets bottom="80.0" left="-40.0" right="99.0" />
+               </StackPane.margin>
+            </Circle>
+            <Label fx:id="name" text="Sarah">
+               <StackPane.margin>
+                  <Insets bottom="90.0" right="250.0" />
+               </StackPane.margin>
+               <font>
+                  <Font name="System Bold Italic" size="22.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="70.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/vecteezy_young-man-anime_11484200%201.png" />
+               </image>
+               <StackPane.margin>
+                  <Insets bottom="90.0" right="399.0" />
+               </StackPane.margin>
+            </ImageView>
+            <Button fx:id="btn_invite" mnemonicParsing="false" prefHeight="37.0" prefWidth="133.0" style="-fx-background-color: linear-gradient(to bottom, white, blue);" text="Invite">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets bottom="100.0" left="370.0" />
+               </StackPane.margin>
+            </Button>
+         </children>
+      </StackPane>
+   </center>
+   <top>
+      <ImageView fitHeight="129.0" fitWidth="395.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="10.0" />
+         </BorderPane.margin>
+         <image>
+            <Image url="@../Images/img2-removebg-preview%20(1).png" />
+         </image>
+      </ImageView>
+   </top>
+   <bottom>
+      <Button fx:id="btn_back" alignment="BOTTOM_LEFT" mnemonicParsing="false" style="-fx-background-color: #FCD015; -fx-background-radius: 10px;" text="Back" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="-80.0" right="399.0" />
+         </BorderPane.margin>
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+      </Button>
+   </bottom>
+</BorderPane>

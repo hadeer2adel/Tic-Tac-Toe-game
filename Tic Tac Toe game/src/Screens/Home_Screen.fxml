@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screens.Home_ScreenController">
-    <stylesheets>
-        <URL value="@Home_Screen.css"/>
-    </stylesheets>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-radius: 10px;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="407.0" fitWidth="607.0" layoutX="-3.0" layoutY="-3.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../../../../../../image/f49d6185-221c-4f18-9adc-89035598f7df.jpeg" />
+         </image>
+      </ImageView>
+      <Button fx:id="btn_single" layoutX="239.0" layoutY="88.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="116.0" style="-fx-background-color: #FCD015; -fx-background-radius: 10px;" text="Single">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_2player" layoutX="239.0" layoutY="175.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="116.0" style="-fx-background-color: #FCD015; -fx-background-radius: 10px;" text="2 Player">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_back" layoutX="151.0" layoutY="349.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="88.0" style="-fx-background-color: #FCD015; -fx-background-radius: 10px;" text="Back">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_online" layoutX="239.0" layoutY="261.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="116.0" style="-fx-background-color: #FCD015; -fx-background-radius: 10px;" text="Online">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_record" layoutX="341.0" layoutY="349.0" mnemonicParsing="false" style="-fx-background-color: #FCD015; -fx-background-radius: 10px;" text="Records">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Button>
+   </children>
 </AnchorPane>
