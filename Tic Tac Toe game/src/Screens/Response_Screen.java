@@ -6,11 +6,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class Response_Screen extends StackPane {
+public abstract class Response_Screen extends StackPane {
 
     protected final AnchorPane anchorPane;
     protected final ImageView backgroundImage;
@@ -57,7 +59,7 @@ public class Response_Screen extends StackPane {
         rectangle.setStroke(javafx.scene.paint.Color.BLACK);
         rectangle.setStrokeType(javafx.scene.shape.StrokeType.INSIDE);
         rectangle.setStrokeWidth(0.0);
-        rectangle.getStyleClass().add("linearBg");
+        rectangle.getStyleClass().add("rectangle");
         rectangle.setWidth(410.0);
 
         CompleteMessage.setFill(javafx.scene.paint.Color.WHITE);
@@ -87,9 +89,9 @@ public class Response_Screen extends StackPane {
         btn_ofCourse.setMnemonicParsing(false);
         btn_ofCourse.setPrefHeight(45.0);
         btn_ofCourse.setPrefWidth(120.0);
-        btn_ofCourse.getStyleClass().add("btn");
-        btn_ofCourse.getStylesheets().add("/Screens/Response_Screen.css");
+        btn_ofCourse.setStyle("-fx-background-color: rgba(249, 204, 12, 1); -fx-background-radius: 10;");
         btn_ofCourse.setText("of Course! ");
+        btn_ofCourse.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btn_ofCourse.setFont(new Font("System Bold Italic", 17.0));
 
         btn_antherTime.setLayoutX(339.0);
@@ -97,8 +99,10 @@ public class Response_Screen extends StackPane {
         btn_antherTime.setMnemonicParsing(false);
         btn_antherTime.setPrefHeight(45.0);
         btn_antherTime.setPrefWidth(120.0);
+        btn_antherTime.setStyle("-fx-background-color: rgba(249, 204, 12, 1); -fx-background-radius: 10;");
         btn_antherTime.getStyleClass().add("btn");
         btn_antherTime.setText("anther time");
+        btn_antherTime.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btn_antherTime.setFont(new Font("System Bold Italic", 17.0));
 
         anchorPane.getChildren().add(backgroundImage);
