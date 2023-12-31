@@ -5,7 +5,9 @@
 .mainFxmlClass {
 
 }
-.rectangle
+.effect
 {
-    -fx-background-color: linear-gradient(to bottom, white, blue);
+    -fx-background-color:linear-gradient(to bottom, darkblue, lightskyblue);
+    -fx-background-radius: 50px;
+    -fx-effect: dropshadow(three-pass-box, darkblue, 10, 0, 0, 0);
 }
