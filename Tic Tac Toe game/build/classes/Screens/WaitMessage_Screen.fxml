@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="anchorPane" prefHeight="200.0" prefWidth="200.0" stylesheets="@WaitMessage_Screen.css">
+         <children>
+            <ImageView fx:id="bk_imageView" fitHeight="406.0" fitWidth="600.0" layoutY="-1.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../Images/Rectangle%2012.png" />
+               </image>
+            </ImageView>
+            <GridPane fx:id="gridPane" layoutX="113.0" layoutY="79.0" prefHeight="259.0" prefWidth="381.0" styleClass="msg_color">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="122.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="122.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="170.0" minHeight="10.0" prefHeight="163.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="label_1" prefHeight="68.0" prefWidth="381.0" text="Waiting for the other" textFill="WHITE">
+                     <padding>
+                        <Insets left="60.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold Italic" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="label_2" prefHeight="49.0" prefWidth="482.0" text="player to respond" textFill="WHITE" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets left="80.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold Italic" size="24.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="wait_imageView" fitHeight="132.0" fitWidth="463.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../Images/Rectangle%2017.png" />
+                     </image>
+                     <GridPane.margin>
+                        <Insets left="130.0" />
+                     </GridPane.margin>
+                  </ImageView>
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
