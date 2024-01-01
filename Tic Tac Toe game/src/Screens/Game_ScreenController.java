@@ -5,6 +5,7 @@
  */
 package Screens;
 
+import DTO.GameDetails;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,9 +25,14 @@ import javafx.stage.Stage;
 public class Game_ScreenController  {
 
     private Stage stage;
-     private Scene scene;
-     private Parent root;
+    private Scene scene;
+    private Parent root;
      
+    private static GameDetails game;
+    
+    public static void setPlayers(String player1, String player2){
+        game = new GameDetails(player1, player2);
+    } 
     public void switchTo2playermode(ActionEvent event) throws IOException{//Game Screen
         root = FXMLLoader.load(getClass().getResource("/Screens/TwoPlayerMode_Screen.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
