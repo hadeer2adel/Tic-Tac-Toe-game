@@ -5,3 +5,6 @@
 .mainFxmlClass {
 
 }
+.bkground_color{
+    -fx-fill: radial-gradient(focus-distance 0% , center 50% 50% , radius 100% , white, white);
+}
