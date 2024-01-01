@@ -2,19 +2,20 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
         <group>
             <file>file:/D:/ITI%20-%20Native%20Mobile%20Application/Java/Tic%20Tac%20Toe%20game%20-%20Java%20project/Tic%20Tac%20Toe%20game/src/Screens/WaitMessage_Screen.css</file>
-            <file>file:/D:/ITI%20-%20Native%20Mobile%20Application/Java/Tic%20Tac%20Toe%20game%20-%20Java%20project/Tic%20Tac%20Toe%20game/src/Screens/WaitMessage_Screen.java</file>
+            <file>file:/D:/ITI%20-%20Native%20Mobile%20Application/Java/Tic%20Tac%20Toe%20game%20-%20Java%20project/Tic%20Tac%20Toe%20game/src/Screens/WaitMessage_ScreenController.java</file>
             <file>file:/D:/ITI%20-%20Native%20Mobile%20Application/Java/Tic%20Tac%20Toe%20game%20-%20Java%20project/Tic%20Tac%20Toe%20game/src/Screens/SingleMode_Screen.css</file>
-            <file>file:/D:/Java%20Project/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Signup_Screen.java</file>
-            <file>file:/D:/Java%20Project/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Login_ScreenController.java</file>
-            <file>file:/D:/Java%20Project/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Mainpkg/Main.java</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/TwoPlayerMode_Screen.css</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/DataBase/DataAccessObject.java</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Game_Screen.java</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/TwoPlayerMode_Screen.java</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Game_Screen.css</file>
+            <file>file:/D:/ITI%20-%20Native%20Mobile%20Application/Java/Tic%20Tac%20Toe%20game%20-%20Java%20project/Tic%20Tac%20Toe%20game/src/Screens/SingleMode_ScreenController.java</file>
+            <file>file:/D:/ITI%20-%20Native%20Mobile%20Application/Java/Tic%20Tac%20Toe%20game%20-%20Java%20project/Tic%20Tac%20Toe%20game/src/Mainpkg/Main.java</file>
+        </group>
+        <group>
+            <file>file:/D:/ITI%20-%20Native%20Mobile%20Application/Java/Tic%20Tac%20Toe%20game%20-%20Java%20project/Tic%20Tac%20Toe%20game/src/Screens/WaitMessage_Screen.css</file>
+            <file>file:/D:/ITI%20-%20Native%20Mobile%20Application/Java/Tic%20Tac%20Toe%20game%20-%20Java%20project/Tic%20Tac%20Toe%20game/src/DTO/GameDetails.java</file>
+            <file>file:/D:/ITI%20-%20Native%20Mobile%20Application/Java/Tic%20Tac%20Toe%20game%20-%20Java%20project/Tic%20Tac%20Toe%20game/src/Screens/WaitMessage_ScreenController.java</file>
+            <file>file:/D:/ITI%20-%20Native%20Mobile%20Application/Java/Tic%20Tac%20Toe%20game%20-%20Java%20project/Tic%20Tac%20Toe%20game/src/Screens/SingleMode_Screen.css</file>
+            <file>file:/D:/ITI%20-%20Native%20Mobile%20Application/Java/Tic%20Tac%20Toe%20game%20-%20Java%20project/Tic%20Tac%20Toe%20game/src/Screens/SingleMode_ScreenController.java</file>
+            <file>file:/D:/ITI%20-%20Native%20Mobile%20Application/Java/Tic%20Tac%20Toe%20game%20-%20Java%20project/Tic%20Tac%20Toe%20game/src/Mainpkg/Main.java</file>
         </group>
     </open-files>
 </project-private>
