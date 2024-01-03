@@ -30,6 +30,7 @@ import javafx.stage.Stage;
  * @author Dell
  */
 public class Video_ScreenController implements Initializable{
+    //impement
 
     private Stage stage;
     private Scene scene;
