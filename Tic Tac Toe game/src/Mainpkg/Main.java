@@ -21,48 +21,30 @@ public class Main extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-          Parent root = FXMLLoader.load(getClass().getResource("/Screens/Frist_Screen.fxml"));
-          Scene scene = new Scene(root,588,388);
-        //Complete exit whenever the window is closed
+        Parent root = FXMLLoader.load(getClass().getResource("/Screens/Frist_Screen.fxml"));
+        Scene scene = new Scene(root,588,388);
+          
         stage.setOnCloseRequest(e -> {
             Platform.exit();
             System.exit(0);
         });
-
-
-      //  Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        stage.setScene(scene);
         
-     //   Scene scene = new Scene(root);
-     stage.setScene(scene);
-        PauseTransition delay = new PauseTransition(Duration.seconds(3));
-
-        
-         delay.setOnFinished(event -> {
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        delay.setOnFinished(event -> {
             try {
-                // Load the FXML file for the first screen
                 Parent firstScreenRoot = FXMLLoader.load(getClass().getResource("/Screens/Home_Screen.fxml"));
-
                 Scene firstScreenScene = new Scene(firstScreenRoot);
                 stage.setScene(firstScreenScene);
-
             } catch (IOException ex) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
             }
         });
 
         stage.show();
-         stage.setResizable(false);
+        stage.setResizable(false);
         delay.play();
-
     }
-    
-    /*@Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/Screens/Home_Screen.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }*/
 
     public static void main(String[] args) {
         launch(args);

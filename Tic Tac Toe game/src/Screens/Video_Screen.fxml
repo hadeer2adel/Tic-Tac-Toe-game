@@ -37,15 +37,15 @@
                </GridPane.margin>
             </MediaView>
             <Label fx:id="playerName" text="Winner" textFill="WHITE">
-               <padding>
-                  <Insets top="20.0" />
-               </padding>
                <GridPane.margin>
-                  <Insets bottom="260.0" left="185.0" right="110.0" />
+                  <Insets bottom="260.0" left="120.0" right="110.0" />
                </GridPane.margin>
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
             </Label>
             <Button fx:id="btn1" mnemonicParsing="false" onAction="#switchToGameAgain" prefHeight="32.0" prefWidth="107.0" style="-fx-background-color: #FCD015; -fx-background-radius: 100;" text="Play again">
                <GridPane.margin>

@@ -43,37 +43,34 @@ public class Video_ScreenController implements Initializable{
     private MediaPlayer mediaPlayer;
     @FXML
     private Label playerName;
-
+    
+    private static String lblPlayer;
+    private static String lblVideo;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    }
-      public void setVideo(String videoFile) {
-        String path = new File("src/media/" + videoFile + ".mp4").getAbsolutePath();
+        playerName.setText(lblPlayer);
+        String path = "" ;
+        switch (lblVideo) {
+            case "win":
+                path = new File("src/Media/win.mp4").getAbsolutePath();
+                break;
+            case "loss":
+                path = new File("src/Media/losser.mp4").getAbsolutePath();
+                break;
+            case "draw":
+                 path = new File("src/Media/draw.mp4").getAbsolutePath();
+                break;
+        }
         media = new Media(new File(path).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
         mediaPlayer.setAutoPlay(true);
-        mediaView.setMediaPlayer(mediaPlayer);
-        mediaPlayer.play();   
+        mediaPlayer.play(); 
     }
-       public void setPlayerName(String name) {
-        playerName.setText(name);
-    }
-       public void showVideo(String playerName) {
-        switch (playerName) {
-            case "Win":
-                setVideo("win");
-                break;
-            case "Loss":
-                setVideo("losser");
-                break;
-            case "draw":
-                setVideo("draw");
-                break;
-            
-        }
-
+    public static void setData(String player, String video) {
+        lblPlayer = player;
+        lblVideo = video;
     }
     
 
