@@ -23,7 +23,7 @@
             <Image url="@../Images/Rectangle%2012.png" />
          </image>
       </ImageView>
-      <GridPane fx:id="gridPane1" layoutX="83.0" layoutY="56.0" prefHeight="289.0" prefWidth="437.0" style="-fx-background-color: #1D11A0;" styleClass="bkground_color" stylesheets="@Video_Screen.css">
+      <GridPane fx:id="gridPane1" layoutX="83.0" layoutY="56.0" prefHeight="289.0" prefWidth="437.0" styleClass="effect" stylesheets="@Video_Screen.css">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -31,12 +31,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <MediaView fx:id="mediaView" fitHeight="190.0" fitWidth="360.0" layoutX="40.0" layoutY="50.0" preserveRatio="false" x="20.0" y="20.0" GridPane.hgrow="ALWAYS">
+            <MediaView fx:id="mediaView" fitHeight="190.0" fitWidth="360.0" layoutX="40.0" layoutY="50.0" preserveRatio="false" styleClass="mainFxmlClass" x="20.0" y="20.0" GridPane.hgrow="ALWAYS">
                <GridPane.margin>
                   <Insets bottom="100.0" left="40.0" right="90.0" top="100.0" />
                </GridPane.margin>
             </MediaView>
-            <Label fx:id="lab1" text="Mohmed" textFill="WHITE">
+            <Label fx:id="playerName" text="Winner" textFill="WHITE">
                <padding>
                   <Insets top="20.0" />
                </padding>
@@ -47,7 +47,7 @@
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="btn1" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" style="-fx-background-color: #FCD015; -fx-background-radius: 100;" text="Play again">
+            <Button fx:id="btn1" mnemonicParsing="false" onAction="#switchToGameAgain" prefHeight="32.0" prefWidth="107.0" style="-fx-background-color: #FCD015; -fx-background-radius: 100;" text="Play again">
                <GridPane.margin>
                   <Insets bottom="20.0" left="280.0" right="60.0" top="250.0" />
                </GridPane.margin>
@@ -55,7 +55,7 @@
                   <Font name="System Bold Italic" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btn2" mnemonicParsing="false" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: #FCD015; -fx-background-radius: 100;" text="New game">
+            <Button fx:id="btn2" mnemonicParsing="false" onAction="#switchToHome" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: #FCD015; -fx-background-radius: 100;" text="New game">
                <GridPane.margin>
                   <Insets bottom="20.0" left="50.0" right="50.0" top="250.0" />
                </GridPane.margin>

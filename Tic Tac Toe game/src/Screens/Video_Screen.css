@@ -5,6 +5,9 @@
 .mainFxmlClass {
 
 }
-.bkground_color{
-    -fx-fill: radial-gradient(focus-distance 0% , center 50% 50% , radius 100% , white, white);
+.effect
+{
+    -fx-background-color:linear-gradient(to bottom, darkblue, lightskyblue);
+    -fx-background-radius: 50px;
+    -fx-effect: dropshadow(three-pass-box, darkblue, 10, 0, 0, 0);
 }
