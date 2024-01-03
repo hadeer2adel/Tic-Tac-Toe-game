@@ -203,12 +203,12 @@ public class Game_ScreenController implements Initializable {
         if((!gameboard[0].equals("")) && gameboard[0].equals(gameboard[4]) && gameboard[0].equals(gameboard[8])) //check diagonal 1
         {
             win = gameboard[0];
-            drawLine(0, "d1");
+            drawLine(0,4,8);
         }
         else if((!gameboard[2].equals("")) && gameboard[2].equals(gameboard[4]) && gameboard[2].equals(gameboard[6])) //check diagonal 2
         {
             win = gameboard[2];
-            drawLine(2, "d2");
+            drawLine(2,4,6);
         }
         else // check row or column
         {
@@ -217,13 +217,13 @@ public class Game_ScreenController implements Initializable {
                 if((!gameboard[i].equals("")) && gameboard[i].equals(gameboard[i+1]) && gameboard[i].equals(gameboard[i+2])) //check row
                 {
                     win = gameboard[i];
-                    drawLine(i, "r");
+                    drawLine(i,i+1,i+2);
                     break;
                 }
                 if((!gameboard[j].equals("")) && gameboard[j].equals(gameboard[j+3]) && gameboard[j].equals(gameboard[j+6])) //check column
                 {
                     win = gameboard[j];
-                    drawLine(j, "c");
+                    drawLine(j,j+3 ,j+6);
                     break;
                 }
             }
@@ -231,8 +231,13 @@ public class Game_ScreenController implements Initializable {
         return win;
     }
         
-    private void drawLine(int n, String type){
-        
+    private void drawLine(int n1, int n2, int n3){
+        gameBtn[n1].setStyle("-fx-background-color:linear-gradient(to bottom, navy, lightskyblue);"
+                + "-fx-effect: dropshadow(three-pass-box, darkblue, 10, 0, 0, 0);");
+        gameBtn[n2].setStyle("-fx-background-color:linear-gradient(to bottom, darkblue, lightskyblue);"
+                + "-fx-effect: dropshadow(three-pass-box, darkblue, 10, 0, 0, 0);");
+        gameBtn[n3].setStyle("-fx-background-color:linear-gradient(to bottom, midnightblue, lightskyblue);"
+                + "-fx-effect: dropshadow(three-pass-box, darkblue, 10, 0, 0, 0);");
     }
     
     public static void setPlayers(String player1, String player2){
