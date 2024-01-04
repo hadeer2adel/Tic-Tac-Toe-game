@@ -1,5 +1,6 @@
 package DataBase;
 
+import DTO.Records;
 import DTO.UserData;
 import org.apache.derby.jdbc.ClientDriver;
 import java.sql.*;
@@ -102,6 +103,16 @@ public class DataAccessObject {
         pst.close();
         
         return result;
+    }
+    
+    public static ArrayList<Records> getAllRecords(int id) throws SQLException {
+        
+        return null;
+    }
+    
+    public static int addRecord(Records record) throws SQLException {
+        
+        return 0;
     }
     
     public static void stop() throws SQLException {
