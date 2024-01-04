@@ -38,7 +38,7 @@ public class DataAccessObject {
         int result = 0;
         String sqlStat = "insert into UserData values(?, ?, ?, ?, 0, false, false)";
         PreparedStatement pst = con.prepareStatement(sqlStat);
-        pst.setInt(1, getNextID());
+        pst.setInt(1, getNextID("UserData"));
         pst.setString(2, user.getName());
         pst.setString(3, user.getEmail());
         pst.setString(4, user.getPassword());
@@ -63,10 +63,11 @@ public class DataAccessObject {
         
     }
     
-    public static int getNextID() throws SQLException {
+    public static int getNextID(String tableName) throws SQLException {
         int id;
-        String sqlStat = "select max(id) from userdata";
+        String sqlStat = "select max(id) from ?";
         PreparedStatement pst = con.prepareStatement(sqlStat);
+        pst.setString(1, tableName);
         ResultSet rs = pst.executeQuery();
         
         if(rs.next())
@@ -111,8 +112,16 @@ public class DataAccessObject {
     }
     
     public static int addRecord(Records record) throws SQLException {
-        
-        return 0;
+        int result = 0;
+        String sqlStat = "insert into Records values(?, ?, ?, ?)";
+        PreparedStatement pst = con.prepareStatement(sqlStat);
+        pst.setInt(1, getNextID("Records"));
+        pst.setString(2, record.getName());
+        pst.setString(3, record.getSteps());
+        pst.setInt(4, record.getUserId());
+        result = pst.executeUpdate();
+        pst.close();
+        return result;
     }
     
     public static void stop() throws SQLException {
