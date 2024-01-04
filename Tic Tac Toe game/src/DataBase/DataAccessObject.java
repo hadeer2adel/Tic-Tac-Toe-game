@@ -107,8 +107,17 @@ public class DataAccessObject {
     }
     
     public static ArrayList<Records> getAllRecords(int id) throws SQLException {
+        ArrayList<Records> allRecords = new ArrayList<Records>();
         
-        return null;
+        String sqlStat = "select * from Records WHERE userid = ?";
+        PreparedStatement pst = con.prepareStatement(sqlStat);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery(sqlStat);
+        while (rs.next()) {
+            Records record = new Records(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+            allRecords.add(record);
+        }
+        return allRecords;
     }
     
     public static int addRecord(Records record) throws SQLException {
