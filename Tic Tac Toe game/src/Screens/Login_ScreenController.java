@@ -33,7 +33,7 @@ public class Login_ScreenController {
      private Parent root;
     
     public void switchToInviation(ActionEvent event) throws IOException{//inviation Screen
-        root = FXMLLoader.load(getClass().getResource("/Screens/Invitation_Screen.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/Screens/Invitation_Screen1.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
