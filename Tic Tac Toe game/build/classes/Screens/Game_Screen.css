@@ -1,0 +1,33 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+.bkground_color{
+    -fx-fill: radial-gradient(focus-distance 0% , center 50% 50% , radius 100% , skyblue, blue);
+}
+.btn_back{
+    -fx-background-color: #FCD015;
+    -fx-background-radius: 20px;
+    
+}
+.btn_Record{
+       
+       -fx-background-color: #FCD015;
+       -fx-background-radius: 15px;
+       
+}
+.btn1{
+     -fx-background-color: white;
+     -fx-background-radius: 5px;
+}
+.btn2{
+     -fx-background-color: white;
+     -fx-background-radius: 5px;
+}
+.btn3{
+     -fx-background-color: white;
+     -fx-background-radius: 5px;
+}

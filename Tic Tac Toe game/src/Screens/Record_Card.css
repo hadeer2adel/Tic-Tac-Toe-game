@@ -1,0 +1,13 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+.effect
+{
+    -fx-background-color:linear-gradient(to bottom, darkblue, lightskyblue);
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, darkblue, 10, 0, 0, 0);
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-radius: 10px;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screens.Home_ScreenController">
+   <children>
+      <ImageView fitHeight="407.0" fitWidth="607.0" layoutX="-3.0" layoutY="-3.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Images/Rectangle%2012.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="171.0" fitWidth="353.0" layoutX="124.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/img2-removebg-preview%20(1).png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btn_single" layoutX="234.0" layoutY="154.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="62.0" prefWidth="126.0" style="-fx-background-color: #FCD015; -fx-background-radius: 30px;" text="Single">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_2player" layoutX="234.0" layoutY="233.0" mnemonicParsing="false" onAction="#switchTo2playerScreen" prefHeight="62.0" prefWidth="126.0" style="-fx-background-color: #FCD015; -fx-background-radius: 30px;" text="2 Player">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_online" layoutX="234.0" layoutY="313.0" mnemonicParsing="false" onAction="#switchToLogIn" prefHeight="62.0" prefWidth="126.0" style="-fx-background-color: #FCD015; -fx-background-radius: 30px;" text="Online">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
