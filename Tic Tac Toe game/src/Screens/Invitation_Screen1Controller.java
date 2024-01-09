@@ -34,5 +34,12 @@ public class Invitation_Screen1Controller {
         stage.setScene(scene);
         stage.show();
     }
+    public void switchToProfile(ActionEvent event) throws IOException{//PlayerInfo
+        root = FXMLLoader.load(getClass().getResource("/Screens/PlayerInfo_Screen.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
     
 }
