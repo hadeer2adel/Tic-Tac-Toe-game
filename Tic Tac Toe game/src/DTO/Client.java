@@ -5,66 +5,117 @@
  */
 package DTO;
 
+import Screens.Login_ScreenController;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.net.InetAddress;
+import java.io.StringReader;
 import java.net.Socket;
-import java.net.SocketException;
-import java.util.Vector;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.control.Alert;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 
-/**
- *
- * @author win 10
- */
-public class Client {
+public class Client implements Runnable{
 
-    Socket socket;
-    String messages;
-    Thread thread;
-    PrintStream printStream;
-    DataInputStream dataInputStream;
-    int localPortNum;
-    String messageSentToServer, email, password;
+    private Thread thread;
+    private Socket server;
+    private int port = 5005;
+    private DataInputStream ear;
+    private DataOutputStream mouth;
+    private BlockingQueue<JsonObject> messages;
+    private boolean connected;
 
-    //static Vector<ClientHandler> clientVector = new Vector<ClientHandler>();
+    public boolean isConnected() {
+        return connected;
+    }
+    
     public Client() {
         try {
-            socket = new Socket(InetAddress.getLoopbackAddress(), 5005);
-            dataInputStream = new DataInputStream(socket.getInputStream());
-            printStream = new PrintStream(socket.getOutputStream());
-            String msg = dataInputStream.readLine();
-            new Thread() {
-                @Override
-                public void run() {
-                    while (true) {
-                        String msg;
-                        try {
-                            msg = dataInputStream.readLine();
-                        } catch (IOException ex) {
-                            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                }
-            }.start();
+            connected = false;
+            server = new Socket("localhost", port);
+            ear = new DataInputStream(server.getInputStream());
+            mouth = new DataOutputStream(server.getOutputStream());
+            messages = new LinkedBlockingQueue<JsonObject>();
+            connected = true;
+            thread = new Thread(this);
+            thread.start();
 
+        } catch (IOException ex) {
+            server = null;
+            connected = false;
+        }
+    }
+    
+    @Override
+    public void run(){
+        while(connected){
+            try {
+                String serverResponse = ear.readUTF();
+                JsonReader jsonReader = Json.createReader(new StringReader(serverResponse));
+                JsonObject responseJson = jsonReader.readObject();
+                handleResponse(responseJson);
+            } catch (IOException ex) {
+                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    public void stop(){
+        try {
+            thread.stop();
+            server.close();
+            server = null;
+            connected = false;
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
-        /*finally {
-            try {
-                socket.close();
-                dataInputStream.close();
-                printStream.close();
-            } catch (IOException ex) {
-                Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }*/
-
     }
+    
+    private void handleResponse(JsonObject responseJson) {
+        try {
+            String responseType = responseJson.getString("response");
+            switch (responseType) {
+                case "login":
+                    messages.put(responseJson);
+                    break;
+                default:
+                    System.out.println("Unknown response type: " + responseType);
+                    break;
+            }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void Login(){
+        try {
+            String email = Login_ScreenController.getEmail();
+            String password = Login_ScreenController.getPassword();
+            JsonObject requestJson = Json.createObjectBuilder()
+                    .add("request", "login")
+                    .add("email", email)
+                    .add("password", password)
+                    .build();
+            mouth.writeUTF(requestJson.toString());
+            mouth.flush();
+            
+            JsonObject responseJson = messages.take();
+            String status = responseJson.getString("status");
 
+            if (status.equals("success")) {
+                FileWriter writer = new FileWriter("playerData.json");
+                writer.write(responseJson.toString());
+                writer.close();
+                Login_ScreenController.SuccessLogin();
+            } 
+        }   catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
