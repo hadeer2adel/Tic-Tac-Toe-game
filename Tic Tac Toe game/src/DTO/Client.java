@@ -5,6 +5,7 @@
  */
 package DTO;
 
+import Screens.Invitation_Screen1Controller;
 import Screens.Login_ScreenController;
 import Screens.Signup_ScreenController;
 import java.io.DataInputStream;
@@ -12,11 +13,18 @@ import java.io.DataOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
@@ -30,6 +38,12 @@ public class Client implements Runnable{
     private DataOutputStream mouth;
     private BlockingQueue<JsonObject> messages;
     private boolean connected;
+    private BlockingQueue<String> messageQueue;
+    boolean reciverResponse = false ;
+    public IntegerProperty senderIDIntProperty = new SimpleIntegerProperty(0);
+    int senderID;
+    public static UserData user;
+    boolean mybool;
 
     public boolean isConnected() {
         return connected;
@@ -84,6 +98,18 @@ public class Client implements Runnable{
                     messages.put(responseJson);
                     break;
                 case "signup":
+                    messages.put(responseJson);
+                    break;
+                case "invite":
+                    messages.put(responseJson);
+                    break;
+                default:
+                    System.out.println("Unknown response type: " + responseType);
+                    break;
+            }
+            String requestType = responseJson.getString("request");
+            switch (requestType) {
+                case "invite":
                     messages.put(responseJson);
                     break;
                 default:
@@ -149,5 +175,65 @@ public class Client implements Runnable{
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
             
+    }
+   
+    public void sendInvitation() {
+        try {
+            int id1 = Invitation_Screen1Controller.getPlayer1ID();
+            int id2 = Invitation_Screen1Controller.getPlayer2ID();
+            
+            JsonObject requestJson = Json.createObjectBuilder()
+                    .add("request", "invite")
+                    .add("Player1", id1)
+                    .add("Player2", id2)
+                    .build();
+            mouth.writeUTF(requestJson.toString());
+            mouth.flush();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    public boolean receiveInvitation() {
+        try {
+            JsonObject responseJson = messages.take();
+            
+            
+            JsonReader jsonReader = Json.createReader(new StringReader(requestMessage));
+            JsonObject responseJsonObject = jsonReader.readObject();
+            String sender = responseJsonObject.getString("id1");
+            String receiver = responseJsonObject.getString("id2");
+            System.out.println(sender + " sent a request to " + receiver);
+            //senderID = sender;
+            Platform.runLater(()
+                    -> senderIDIntProperty.set(senderID));
+            return true;
+
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public void replyToInviteRequest(String reply) {
+        try {
+            JsonObject jsonObject = Json.createObjectBuilder()
+                    .add("func", "replyToInvite")
+                    .add("senderUserid", senderID)
+                    .add("receiverUserid", this.user.getId())
+                    .add("reply", reply)
+                    .build();
+
+            Writer writer = new StringWriter();
+            Json.createWriter(writer).write(jsonObject);
+            String jsonString = writer.toString();
+
+            mouth.writeUTF(jsonString);
+            mybool = false;
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
