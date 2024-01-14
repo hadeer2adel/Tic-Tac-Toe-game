@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
@@ -46,6 +48,7 @@ public class Video_ScreenController implements Initializable{
     
     private static String lblPlayer;
     private static String lblVideo;
+    private static String lblMode;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -55,7 +58,7 @@ public class Video_ScreenController implements Initializable{
             case "win":
                 path = new File("src/Media/win.mp4").getAbsolutePath();
                 break;
-            case "loss":
+            case "losser":
                 path = new File("src/Media/losser.mp4").getAbsolutePath();
                 break;
             case "draw":
@@ -68,9 +71,10 @@ public class Video_ScreenController implements Initializable{
         mediaPlayer.setAutoPlay(true);
         mediaPlayer.play(); 
     }
-    public static void setData(String player, String video) {
+    public static void setData(String player, String video, String mode) {
         lblPlayer = player;
         lblVideo = video;
+        lblMode = mode;
     }
     
 
@@ -86,11 +90,18 @@ public class Video_ScreenController implements Initializable{
 
     public void switchToGameAgain(ActionEvent event) throws IOException {//Game Screen
         mediaPlayer.stop();
-        root = FXMLLoader.load(getClass().getResource("/Screens/Game_Screen.fxml"));
+        if(lblMode.equalsIgnoreCase("twoPlayer")){
+            root = FXMLLoader.load(getClass().getResource("/Screens/Game_Screen.fxml"));
+        }
+        else if(lblMode.equalsIgnoreCase("pc")){
+            root = FXMLLoader.load(getClass().getResource("/Screens/Pc_Game.fxml"));
+        }
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+      
 
     }
+      
 }

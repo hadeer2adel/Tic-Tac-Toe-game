@@ -78,7 +78,7 @@ public class Game_ScreenController implements Initializable {
         isGameEnd = false;
         gameBtn = new Button[9];
     }
-
+   
     public void clickBtn1(ActionEvent event) {
         int n = 0;
         if (gameboard[n].equals("")) {
@@ -174,7 +174,7 @@ public class Game_ScreenController implements Initializable {
                 if (Winner.equals("x")) {
                     game.updatePlayerScore_1();
                     isGameEnd = true;
-                    Video_ScreenController.setData("The Winner is "+game.getPlayerName_1(), "win");
+                    Video_ScreenController.setData("The Winner is "+game.getPlayerName_1(), "win", "twoPlayer");
                     try {
                         switchToVideoScreen(event);
                     } catch (IOException ex) {
@@ -183,7 +183,7 @@ public class Game_ScreenController implements Initializable {
                 } else if (Winner.equals("o")) {
                     game.updatePlayerScore_2();
                     isGameEnd = true;
-                    Video_ScreenController.setData("The Winner is "+game.getPlayerName_2(), "win");
+                    Video_ScreenController.setData("The Winner is "+game.getPlayerName_2(), "win", "twoPlayer");
                     try {
                         switchToVideoScreen(event);
                     } catch (IOException ex) {
@@ -193,7 +193,7 @@ public class Game_ScreenController implements Initializable {
             }
             if ((!isGameEnd) && btnsClicked == 9) {
                 isGameEnd = true;
-                Video_ScreenController.setData("It's Draw", "draw");
+                Video_ScreenController.setData("It's Draw", "draw", "twoPlayer");
                 try {
                     switchToVideoScreen(event);
                 } catch (IOException ex) {
