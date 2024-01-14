@@ -6,6 +6,7 @@
 package DTO;
 
 import Screens.Login_ScreenController;
+import Screens.Signup_ScreenController;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileWriter;
@@ -82,6 +83,9 @@ public class Client implements Runnable{
                 case "login":
                     messages.put(responseJson);
                     break;
+                case "signup":
+                    messages.put(responseJson);
+                    break;
                 default:
                     System.out.println("Unknown response type: " + responseType);
                     break;
@@ -117,5 +121,33 @@ public class Client implements Runnable{
         } catch (InterruptedException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void SignUp() {
+        try {
+            String email = Signup_ScreenController.getEmail();
+            String name = Signup_ScreenController.getName();
+            String password = Signup_ScreenController.getPassword();
+            JsonObject requestJson = Json.createObjectBuilder()
+                    .add("request", "signup")
+                    .add("name", name)
+                    .add("email", email)
+                    .add("password", password)
+                    .build();
+            mouth.writeUTF(requestJson.toString());
+            mouth.flush();
+            
+            //Response
+            JsonObject responseJson = messages.take();
+            String status = responseJson.getString("status");
+            if (status.equals("success")) {
+                Signup_ScreenController.SuccessSignUp();
+            } 
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
     }
 }
