@@ -25,6 +25,7 @@ public class SingleMode_ScreenController {
      
     public void switchToPcGame(ActionEvent event) {try {
         Pc_GameController.setPlayers("Player", "PC");
+        Pc_GameController.setLevel("easy");
         root = FXMLLoader.load(getClass().getResource("/Screens/Pc_Game.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -34,6 +35,20 @@ public class SingleMode_ScreenController {
              ex.printStackTrace();
          }
     }
+    
+    public void switchToPcGameHard(ActionEvent event) {try {
+        Pc_GameController.setPlayers("Player", "PC");
+        Pc_GameController.setLevel("hard");
+        root = FXMLLoader.load(getClass().getResource("/Screens/Pc_Game.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+         } catch (IOException ex) {
+             ex.printStackTrace();
+         }
+    }
+    
     
     public void switchTohome(ActionEvent event) throws IOException{//home Screen
         root = FXMLLoader.load(getClass().getResource("/Screens/Home_Screen.fxml"));
