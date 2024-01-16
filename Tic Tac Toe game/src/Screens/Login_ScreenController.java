@@ -27,7 +27,7 @@ import javafx.stage.Stage;
  */
 public class Login_ScreenController {
 
-    private Stage stage;
+    private Stage stage = Mainpkg.Main.getAppStage();
     private Scene scene;
     private Parent root;
     
@@ -78,11 +78,11 @@ public class Login_ScreenController {
         password = field_Password.getText();
         if(validation(email, password)){
             client = new Client();
-            if(client.isConnected()){
+            ConnectedClient.setClient(client);
+            if(client.isServerConnected()){
                 client.Login();
-                if (successLogin) {
+                if (client.isopSuccess()) {
                     root = FXMLLoader.load(getClass().getResource("/Screens/Invitation_Screen1.fxml"));
-                    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
                     stage.setScene(scene);
                     stage.show();
@@ -94,7 +94,6 @@ public class Login_ScreenController {
                     alert.setContentText("Invalid email or password");
                     alert.showAndWait();
                 }
-                client.stop();
             }
             else{
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -108,7 +107,6 @@ public class Login_ScreenController {
     
     public void switchToHome(ActionEvent event) throws IOException{//home Screen
         root = FXMLLoader.load(getClass().getResource("/Screens/Home_Screen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -117,7 +115,6 @@ public class Login_ScreenController {
     @FXML
     private void switchSignUp(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Screens/Signup_Screen.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
