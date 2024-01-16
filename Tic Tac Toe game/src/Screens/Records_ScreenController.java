@@ -15,13 +15,12 @@ import javafx.stage.Stage;
 
 public class Records_ScreenController{
 
-     private Stage stage;
+     private Stage stage = Mainpkg.Main.getAppStage();
      private Scene scene;
      private Parent root;
     
     public void switchToProfile(ActionEvent event) throws IOException{
         root = FXMLLoader.load(getClass().getResource("/Screens/PlayerInfo_Screen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

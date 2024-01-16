@@ -43,7 +43,7 @@ import javafx.util.Duration;
  */
 public class Game_ScreenController implements Initializable {
 
-    private Stage stage;
+    private Stage stage = Mainpkg.Main.getAppStage();
     private Scene scene;
     private Parent root;
 
@@ -251,7 +251,6 @@ public class Game_ScreenController implements Initializable {
 
     public void switchTo2playermode(ActionEvent event) throws IOException {//Game Screen
         root = FXMLLoader.load(getClass().getResource("/Screens/TwoPlayerMode_Screen.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -263,7 +262,6 @@ public class Game_ScreenController implements Initializable {
         delay.setOnFinished(e -> {
             try {
                 root = FXMLLoader.load(getClass().getResource("/Screens/Video_Screen.fxml"));
-                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();

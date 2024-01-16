@@ -7,7 +7,9 @@ package DTO;
 
 import Screens.Invitation_Screen1Controller;
 import Screens.Login_ScreenController;
+import Screens.Response_ScreenController;
 import Screens.Signup_ScreenController;
+import Screens.WaitMessage_ScreenController;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileWriter;
@@ -25,6 +27,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Alert;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
@@ -37,60 +40,67 @@ public class Client implements Runnable{
     private DataInputStream ear;
     private DataOutputStream mouth;
     private BlockingQueue<JsonObject> messages;
-    private boolean connected;
-    private BlockingQueue<String> messageQueue;
-    boolean reciverResponse = false ;
-    public IntegerProperty senderIDIntProperty = new SimpleIntegerProperty(0);
-    int senderID;
-    public static UserData user;
-    boolean mybool;
+    private boolean connectedServer;
+    private boolean opSuccess;
 
-    public boolean isConnected() {
-        return connected;
+    public boolean isopSuccess() {
+        return opSuccess;
+    }
+    
+    public boolean isServerConnected() {
+        return connectedServer;
     }
     
     public Client() {
         try {
-            connected = false;
+            connectedServer = false;
             server = new Socket("localhost", port);
             ear = new DataInputStream(server.getInputStream());
             mouth = new DataOutputStream(server.getOutputStream());
             messages = new LinkedBlockingQueue<JsonObject>();
-            connected = true;
+            connectedServer = true;
             thread = new Thread(this);
             thread.start();
 
         } catch (IOException ex) {
             server = null;
-            connected = false;
+            connectedServer = false;
         }
     }
     
     @Override
     public void run(){
-        while(connected){
+        System.out.println("DTO.Client.run()");
+        while(connectedServer){
             try {
                 String serverResponse = ear.readUTF();
                 JsonReader jsonReader = Json.createReader(new StringReader(serverResponse));
                 JsonObject responseJson = jsonReader.readObject();
-                handleResponse(responseJson);
+                
+                if(responseJson.containsKey("response"))
+                    handleResponse(responseJson);
+                else if(responseJson.containsKey("request"))
+                    handleRequest(responseJson);
+                
             } catch (IOException ex) {
                 Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
+    
     public void stop(){
         try {
             thread.stop();
             server.close();
             server = null;
-            connected = false;
+            connectedServer = false;
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     private void handleResponse(JsonObject responseJson) {
+        System.out.println("DTO.Client.handleResponse()");
         try {
             String responseType = responseJson.getString("response");
             switch (responseType) {
@@ -101,16 +111,7 @@ public class Client implements Runnable{
                     messages.put(responseJson);
                     break;
                 case "invite":
-                    messages.put(responseJson);
-                    break;
-                default:
-                    System.out.println("Unknown response type: " + responseType);
-                    break;
-            }
-            String requestType = responseJson.getString("request");
-            switch (requestType) {
-                case "invite":
-                    messages.put(responseJson);
+                    sendInvitationHandeler(responseJson);
                     break;
                 default:
                     System.out.println("Unknown response type: " + responseType);
@@ -121,8 +122,23 @@ public class Client implements Runnable{
         }
     }
     
+    private void handleRequest(JsonObject requestJson) {
+        System.out.println("DTO.Client.handleRequest()");
+        String requestType = requestJson.getString("request");
+        switch (requestType) {
+            case "invite":
+                receiveInvitation(requestJson);
+                break;
+            default:
+                System.out.println("Unknown response type: " + requestJson);
+                break;
+        }
+    }
+    
     public void Login(){
+        System.out.println("DTO.Client.Login()");
         try {
+            opSuccess = false;
             String email = Login_ScreenController.getEmail();
             String password = Login_ScreenController.getPassword();
             JsonObject requestJson = Json.createObjectBuilder()
@@ -140,7 +156,7 @@ public class Client implements Runnable{
                 FileWriter writer = new FileWriter("playerData.json");
                 writer.write(responseJson.toString());
                 writer.close();
-                Login_ScreenController.SuccessLogin();
+                opSuccess = true;
             } 
         }   catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
@@ -150,7 +166,9 @@ public class Client implements Runnable{
     }
 
     public void SignUp() {
+        System.out.println("DTO.Client.SignUp()");
         try {
+            opSuccess = false;
             String email = Signup_ScreenController.getEmail();
             String name = Signup_ScreenController.getName();
             String password = Signup_ScreenController.getPassword();
@@ -167,7 +185,7 @@ public class Client implements Runnable{
             JsonObject responseJson = messages.take();
             String status = responseJson.getString("status");
             if (status.equals("success")) {
-                Signup_ScreenController.SuccessSignUp();
+                opSuccess = true;
             } 
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
@@ -178,62 +196,74 @@ public class Client implements Runnable{
     }
    
     public void sendInvitation() {
+        System.out.println("DTO.Client.sendInvitation()");
+        opSuccess = false;
         try {
             int id1 = Invitation_Screen1Controller.getPlayer1ID();
             int id2 = Invitation_Screen1Controller.getPlayer2ID();
+            String name1 = Invitation_Screen1Controller.getPlayer1Name();
+            String name2 = Invitation_Screen1Controller.getPlayer2Name();
             
             JsonObject requestJson = Json.createObjectBuilder()
                     .add("request", "invite")
-                    .add("Player1", id1)
-                    .add("Player2", id2)
+                    .add("id1", id1)
+                    .add("id2", id2)
+                    .add("name1", name1)
+                    .add("name2", name2)
                     .build();
+            
             mouth.writeUTF(requestJson.toString());
             mouth.flush();
-            
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void sendInvitationHandeler(JsonObject responseJson) {
+        System.out.println("DTO.Client.sendInvitationHandeler()");
+        opSuccess = responseJson.getBoolean("status");
+        if (opSuccess) {
+            Platform.runLater(()->{
+                WaitMessage_ScreenController controller = new WaitMessage_ScreenController();
+                controller.openGameScreen();
+            });
+        } 
+        else {
+            Platform.runLater(()->{
+                WaitMessage_ScreenController controller = new WaitMessage_ScreenController();
+                controller.openInvitationScreen();
+            });
+        }
+    }
+    
+    public void receiveInvitation(JsonObject requestJson) {
+        System.out.println("DTO.Client.receiveInvitation()");
         
+        Platform.runLater(() -> {
+            Response_ScreenController.setPlayer(requestJson.getString("name1"));
+            Response_ScreenController.setJson(requestJson);
+            Invitation_Screen1Controller controller = new Invitation_Screen1Controller();
+            controller.openResponeScreen();
+        });
     }
-
-    public boolean receiveInvitation() {
+    
+    public void receiveInvitationHandeler(JsonObject requestJson, boolean accepted) {
         try {
-            JsonObject responseJson = messages.take();
-            
-            
-            JsonReader jsonReader = Json.createReader(new StringReader(requestMessage));
-            JsonObject responseJsonObject = jsonReader.readObject();
-            String sender = responseJsonObject.getString("id1");
-            String receiver = responseJsonObject.getString("id2");
-            System.out.println(sender + " sent a request to " + receiver);
-            //senderID = sender;
-            Platform.runLater(()
-                    -> senderIDIntProperty.set(senderID));
-            return true;
-
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-
-    public void replyToInviteRequest(String reply) {
-        try {
-            JsonObject jsonObject = Json.createObjectBuilder()
-                    .add("func", "replyToInvite")
-                    .add("senderUserid", senderID)
-                    .add("receiverUserid", this.user.getId())
-                    .add("reply", reply)
+            System.out.println("DTO.Client.receiveInvitationHandeler()");
+            JsonObject responseJson = Json.createObjectBuilder()
+                    .add("response", "invite")
+                    .add("status", accepted)
+                    .add("id1", requestJson.getInt("id1"))
+                    .add("id2", requestJson.getInt("id2"))
+                    .add("name1", requestJson.getString("name1"))
+                    .add("name2", requestJson.getString("name2"))
                     .build();
-
-            Writer writer = new StringWriter();
-            Json.createWriter(writer).write(jsonObject);
-            String jsonString = writer.toString();
-
-            mouth.writeUTF(jsonString);
-            mybool = false;
+            
+            mouth.writeUTF(responseJson.toString());
+            mouth.flush();
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 }

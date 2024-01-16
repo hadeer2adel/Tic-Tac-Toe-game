@@ -22,13 +22,12 @@ import javafx.stage.Stage;
  */
 public class SingleMode_ScreenController{
 
-     private Stage stage;
+     private Stage stage = Mainpkg.Main.getAppStage();
      private Scene scene;
      private Parent root;
      
     public void switchToPcGame(ActionEvent event) throws IOException{//pc Game Screen
         root = FXMLLoader.load(getClass().getResource("/Screens/Pc_Game.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -36,7 +35,6 @@ public class SingleMode_ScreenController{
     
     public void switchTohome(ActionEvent event) throws IOException{//home Screen
         root = FXMLLoader.load(getClass().getResource("/Screens/Home_Screen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

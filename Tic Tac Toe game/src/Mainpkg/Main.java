@@ -18,31 +18,38 @@ import javafx.util.Duration;
 
 
 public class Main extends Application {
+    private static Stage appStage;
+
+    public static Stage getAppStage() {
+        return appStage;
+    }
+    
     
     @Override
     public void start(Stage stage) throws Exception {
+        appStage = stage;
         Parent root = FXMLLoader.load(getClass().getResource("/Screens/Frist_Screen.fxml"));
         Scene scene = new Scene(root,588,388);
           
-        stage.setOnCloseRequest(e -> {
+        appStage.setOnCloseRequest(e -> {
             Platform.exit();
             System.exit(0);
         });
-        stage.setScene(scene);
+        appStage.setScene(scene);
         
         PauseTransition delay = new PauseTransition(Duration.seconds(2));
         delay.setOnFinished(event -> {
             try {
                 Parent firstScreenRoot = FXMLLoader.load(getClass().getResource("/Screens/Home_Screen.fxml"));
                 Scene firstScreenScene = new Scene(firstScreenRoot);
-                stage.setScene(firstScreenScene);
+                appStage.setScene(firstScreenScene);
             } catch (IOException ex) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
             }
         });
 
-        stage.show();
-        stage.setResizable(false);
+        appStage.show();
+        appStage.setResizable(false);
         delay.play();
     }
 

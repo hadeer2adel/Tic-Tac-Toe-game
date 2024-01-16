@@ -22,20 +22,18 @@ import javafx.stage.Stage;
  * @author win 10
  */
 public class PlayerInfo_ScreenController  {
-     private Stage stage;
+     private Stage stage = Mainpkg.Main.getAppStage();
      private Scene scene;
      private Parent root;
      
      public void switchToInvetation(ActionEvent event) throws IOException{//Invitation_Screen
         root = FXMLLoader.load(getClass().getResource("/Screens/Invitation_Screen1.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     } 
      public void switchToRecords(ActionEvent event) throws IOException{//Invitation_Screen
         root = FXMLLoader.load(getClass().getResource("/Screens/Records_Screen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

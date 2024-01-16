@@ -6,6 +6,7 @@
 package Screens;
 
 import DTO.Client;
+import DTO.ConnectedClient;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,7 +32,7 @@ import javax.json.JsonObject;
  */
 public class Signup_ScreenController {
 
-    private Stage stage;
+    private Stage stage = Mainpkg.Main.getAppStage();
     private Scene scene;
     private Parent root;
     @FXML
@@ -46,13 +47,11 @@ public class Signup_ScreenController {
     private Button btn_SignUp;
     private final String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$";
     private final String nameRegex = "^[a-zA-Z0-9_-]{3,16}$";
-    private static boolean successSignUp = false;
     private static String email, password ,name;
     private Client client;
     
     public void switchTologin(ActionEvent event) throws IOException{//login Screen
         root = FXMLLoader.load(getClass().getResource("/Screens/Login_Screen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -112,9 +111,6 @@ public class Signup_ScreenController {
         return valid;  
     }
     
-    public static void SuccessSignUp() {
-        successSignUp = true;
-    }
     public static String getEmail() {
         return email;
     }
@@ -133,13 +129,12 @@ public class Signup_ScreenController {
         if (validation())
         {
             client = new Client();
-            if(client.isConnected())
+            if(client.isServerConnected())
             {
                 client.SignUp();
-                if (successSignUp) {
+                if (client.isopSuccess()) {
                     //login Page
                     root = FXMLLoader.load(getClass().getResource("/Screens/Login_Screen.fxml"));
-                    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
                     stage.setScene(scene);
                     stage.show();
@@ -151,9 +146,8 @@ public class Signup_ScreenController {
                     alert.setContentText("Try Again.");
                     alert.showAndWait();
                 }
-                client.stop();
             }
-            
+            client.stop();            
         }
           
     }

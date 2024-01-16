@@ -22,13 +22,12 @@ import javafx.stage.Stage;
  * @author Sarah Sobhy
  */
 public class Pc_GameController{
-    private Stage stage;
+    private Stage stage = Mainpkg.Main.getAppStage();
      private Scene scene;
      private Parent root;
     
     public void switchToSinglemode(ActionEvent event) throws IOException{//single mode Screen
         root = FXMLLoader.load(getClass().getResource("/Screens/SingleMode_Screen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
