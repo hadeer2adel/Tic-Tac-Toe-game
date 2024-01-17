@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -36,9 +37,10 @@ public class PlayerInfo_ScreenController implements  Initializable  {
      private Scene scene;
      private Parent root;
      
-     @FXML
-    String labelName;
-    int labelNumOfScore; 
+    @FXML
+    private Label labelName;
+    @FXML
+    private Label labelNumOfScore; 
 
      
      public void switchToInvetation(ActionEvent event) throws IOException{//Invitation_Screen
@@ -65,8 +67,8 @@ public class PlayerInfo_ScreenController implements  Initializable  {
             JsonStructure jsonSt = reader.read();
             JsonObject obj = (JsonObject) jsonSt;
 
-            labelName = obj.getString("name");
-            labelNumOfScore = obj.getInt("score");
+            labelName.setText(obj.getString("name"));
+            labelNumOfScore.setText(""+obj.getInt("score"));
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
