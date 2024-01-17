@@ -16,14 +16,14 @@
          </image>
       </ImageView>
       <ListView fx:id="onlinePlayersListview" layoutX="26.0" layoutY="67.0" prefHeight="266.0" prefWidth="549.0" styleClass="scroll-bar" />
-      <Button fx:id="btn_back" alignment="BOTTOM_LEFT" layoutX="34.0" layoutY="347.0" mnemonicParsing="false" onAction="#switchToHome" style="-fx-background-color: #FCD015; -fx-background-radius: 10px;" text="LogOut">
+      <Button fx:id="btn_back" alignment="CENTER" layoutX="34.0" layoutY="347.0" mnemonicParsing="false" onAction="#switchToHome" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #FCD015; -fx-background-radius: 20px;" text="LogOut">
          <font>
-            <Font name="System Bold Italic" size="15.0" />
+            <Font name="System Bold Italic" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnProfile" layoutX="428.0" layoutY="347.0" mnemonicParsing="false" onAction="#switchToProfile" style="-fx-background-color: #FCD015; -fx-background-radius: 10px;" text="Profile">
+      <Button fx:id="btnProfile" alignment="CENTER" layoutX="428.0" layoutY="347.0" mnemonicParsing="false" onAction="#switchToProfile" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #FCD015; -fx-background-radius: 20px;" text="Profile">
          <font>
-            <Font name="System Bold Italic" size="15.0" />
+            <Font name="System Bold Italic" size="17.0" />
          </font>
       </Button>
       <Label fx:id="onlinePlayersLabel" layoutX="46.0" layoutY="36.0" prefHeight="31.0" prefWidth="166.0" text="Available Players" textFill="WHITE">
@@ -31,5 +31,6 @@
             <Font name="System Bold Italic" size="17.0" />
          </font>
       </Label>
+      <Button fx:id="refreshBtn" alignment="CENTER" layoutX="478.0" layoutY="16.0" mnemonicParsing="false" onAction="#refresh" prefHeight="40.0" prefWidth="42.0" style="-fx-background-color: CRIMSON; -fx-background-radius: 20;" />
    </children>
 </Pane>

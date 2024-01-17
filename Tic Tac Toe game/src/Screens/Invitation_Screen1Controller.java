@@ -22,7 +22,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -34,7 +37,8 @@ public class Invitation_Screen1Controller implements Initializable {
     private Stage stage = Mainpkg.Main.getAppStage();;
     private Scene scene;
     private Parent root;
-
+    @FXML
+    private Button refreshBtn;
 
     @FXML
     private ListView<UserData> onlinePlayersListview;
@@ -43,6 +47,10 @@ public class Invitation_Screen1Controller implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ImageView imageView = new ImageView(new Image("/Images/refresh.png"));
+        imageView.setFitHeight(35);
+        imageView.setFitWidth(30);
+        refreshBtn.setGraphic(imageView);
         updateUI();
     }
     
@@ -73,6 +81,30 @@ public class Invitation_Screen1Controller implements Initializable {
                 alert.setTitle("Logout");
                 alert.setHeaderText(null);
                 alert.setContentText("Sorry you can't logout");
+                alert.showAndWait();
+            }
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Server");
+            alert.setHeaderText(null);
+            alert.setContentText("Server is OFF now");
+            alert.showAndWait();
+        }
+    }
+    
+    public void refresh(ActionEvent event) throws IOException{
+        Client client = ConnectedClient.getClient();
+        if(client.isServerConnected()){
+            client.getAvailablePlayers();
+            if(client.isopSuccess()){
+                updateUI();
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Refresh");
+                alert.setHeaderText(null);
+                alert.setContentText("Sorry can not refresh now");
                 alert.showAndWait();
             }
         }
