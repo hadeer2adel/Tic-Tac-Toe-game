@@ -34,28 +34,15 @@ public class Invitation_Screen1Controller implements Initializable {
     private Stage stage = Mainpkg.Main.getAppStage();;
     private Scene scene;
     private Parent root;
-    private Client client;
 
 
     @FXML
     private ListView<UserData> onlinePlayersListview;
+    private ObservableList<UserData>  onlinePlayers;
     
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        client = ConnectedClient.getClient();
-        
-        if(client.isServerConnected()){
-            client.getAvailablePlayers();
-        }
-        else{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Server");
-            alert.setHeaderText(null);
-            alert.setContentText("Server is OFF now");
-            alert.showAndWait();
-        }
-        
         updateUI();
     }
     
@@ -71,11 +58,31 @@ public class Invitation_Screen1Controller implements Initializable {
         }
     }
     
-    public void switchTologin(ActionEvent event) throws IOException{//login Screen
-        root = FXMLLoader.load(getClass().getResource("/Screens/Login_Screen.fxml"));
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToHome(ActionEvent event) throws IOException{
+        Client client = ConnectedClient.getClient();
+        if(client.isServerConnected()){
+            client.Logout();
+            if(client.isopSuccess()){
+                root = FXMLLoader.load(getClass().getResource("/Screens/Home_Screen.fxml"));
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Logout");
+                alert.setHeaderText(null);
+                alert.setContentText("Sorry you can't logout");
+                alert.showAndWait();
+            }
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Server");
+            alert.setHeaderText(null);
+            alert.setContentText("Server is OFF now");
+            alert.showAndWait();
+        }
     }
     
     public void switchToProfile(ActionEvent event) throws IOException{//PlayerInfo
@@ -87,11 +94,11 @@ public class Invitation_Screen1Controller implements Initializable {
 
     public void updateUI() {
         try {
-            JsonReader reader = Json.createReader(new FileInputStream(new File("availablePlayers.json")));
+            JsonReader reader = Json.createReader(new FileInputStream(new File("Files/availablePlayers"+ConnectedClient.getClient().getId()+".json")));
             JsonObject jsonObject = reader.readObject();
             JsonArray jsonOnlinePlayers = jsonObject.getJsonArray("players");
             int size = jsonOnlinePlayers.size();
-            ObservableList<UserData> onlinePlayers = FXCollections.observableArrayList();
+            onlinePlayers = FXCollections.observableArrayList();
             
             for(int i = 0; i < size; i++){
                 JsonObject jsonPlayer = jsonOnlinePlayers.getJsonObject(i);

@@ -46,7 +46,12 @@ public class Client implements Runnable {
     private BlockingQueue<JsonObject> messages;
     private boolean connectedServer;
     private boolean opSuccess;
+    private int id;
 
+    public int getId() {
+        return id;
+    }
+    
     public boolean isopSuccess() {
         return opSuccess;
     }
@@ -95,10 +100,12 @@ public class Client implements Runnable {
 
     public void stop() {
         try {
+            id = -1;
             thread.stop();
             server.close();
             server = null;
             connectedServer = false;
+            ConnectedClient.setClient(null);
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -120,6 +127,9 @@ public class Client implements Runnable {
                     break;
                 case "invite":
                     sendInvitationHandeler(responseJson);
+                    break;
+                case "logout":
+                    messages.put(responseJson);
                     break;
                 default:
                     System.out.println("Unknown response type: " + responseType);
@@ -143,12 +153,9 @@ public class Client implements Runnable {
         }
     }
 
-    public void Login() {
-        System.out.println("DTO.Client.Login()");
+    public void Login(String email, String password) {
         try {
             opSuccess = false;
-            String email = Login_ScreenController.getEmail();
-            String password = Login_ScreenController.getPassword();
             JsonObject requestJson = Json.createObjectBuilder()
                     .add("request", "login")
                     .add("email", email)
@@ -161,7 +168,8 @@ public class Client implements Runnable {
             String status = responseJson.getString("status");
 
             if (status.equals("success")) {
-                FileWriter writer = new FileWriter("playerData.json");
+                id = responseJson.getInt("id");
+                FileWriter writer = new FileWriter("Files/playerData"+id+".json");
                 writer.write(responseJson.toString());
                 writer.close();
                 opSuccess = true;
@@ -173,13 +181,10 @@ public class Client implements Runnable {
         }
     }
 
-    public void SignUp() {
+    public void SignUp(String email, String name, String password) {
         System.out.println("DTO.Client.SignUp()");
         try {
             opSuccess = false;
-            String email = Signup_ScreenController.getEmail();
-            String name = Signup_ScreenController.getName();
-            String password = Signup_ScreenController.getPassword();
             JsonObject requestJson = Json.createObjectBuilder()
                     .add("request", "signup")
                     .add("name", name)
@@ -205,10 +210,6 @@ public class Client implements Runnable {
 
     public void getAvailablePlayers() {
         try {
-            JsonReader reader = Json.createReader(new FileInputStream(new File("playerData.json")));
-            JsonObject player = reader.readObject();
-            int id = player.getInt("id");
-            
             JsonObject requestJson = Json.createObjectBuilder()
                     .add("request", "availablePlayers")
                     .add("id", id)
@@ -219,7 +220,7 @@ public class Client implements Runnable {
             JsonObject responseJson = messages.take();
             String status = responseJson.getString("status");
             if (status.equals("success")) {
-                FileWriter writer = new FileWriter("availablePlayers.json");
+                FileWriter writer = new FileWriter("Files/availablePlayers"+id+".json");
                 writer.write(responseJson.toString());
                 writer.close();
             }
@@ -234,7 +235,7 @@ public class Client implements Runnable {
         System.out.println("DTO.Client.sendInvitation()");
         opSuccess = false;
         try {
-            JsonReader reader = Json.createReader(new FileInputStream(new File("playerData.json")));
+            JsonReader reader = Json.createReader(new FileInputStream(new File("Files/playerData"+id+".json")));
             JsonObject player1 = reader.readObject();
             int id1 = player1.getInt("id");
             String name1 = player1.getString("name");
@@ -257,7 +258,6 @@ public class Client implements Runnable {
         System.out.println("DTO.Client.sendInvitationHandeler()");
         opSuccess = responseJson.getBoolean("status");
         if (opSuccess) {
-            System.out.println("------------------------------sendInvitationHandeler");
             Platform.runLater(() -> {
                 WaitMessage_ScreenController controller = new WaitMessage_ScreenController();
                 controller.openGameScreen();
@@ -299,4 +299,32 @@ public class Client implements Runnable {
         }
     }
 
+    public void Logout() {
+        try {
+            opSuccess = false;
+            JsonObject requestJson = Json.createObjectBuilder()
+                    .add("request", "logout")
+                    .add("id", id)
+                    .build();
+            mouth.writeUTF(requestJson.toString());
+            mouth.flush();
+
+            JsonObject responseJson = messages.take();
+            String status = responseJson.getString("status");
+
+            if (status.equals("success")) {
+                File file = new File("Files/playerData"+id+".json");
+                file.delete();
+                file = new File("Files/availablePlayers"+id+".json");
+                file.delete();
+                stop();
+                opSuccess = true;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        
 }

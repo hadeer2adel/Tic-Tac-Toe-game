@@ -75,7 +75,6 @@ public class Response_ScreenController implements Initializable {
     }
 
     public void rejectInvitation(ActionEvent event) throws IOException, InterruptedException{//inviation Screen
-        System.out.println("Screens.Response_ScreenController.rejectInvitation()");
         if(client.isServerConnected()){
             client.receiveInvitationHandeler(jsonObject, false);
             openInvitationScreen();
@@ -90,7 +89,6 @@ public class Response_ScreenController implements Initializable {
     }
     
     public void openInvitationScreen() {
-        System.out.println("Screens.WaitMessage_ScreenController.openInvitationScreen()");
         try {
             root = FXMLLoader.load(getClass().getResource("/Screens/Invitation_Screen1.fxml"));
             scene = new Scene(root);

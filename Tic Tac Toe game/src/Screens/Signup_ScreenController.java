@@ -47,7 +47,7 @@ public class Signup_ScreenController {
     private Button btn_SignUp;
     private final String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$";
     private final String nameRegex = "^[a-zA-Z0-9_-]{3,16}$";
-    private static String email, password ,name;
+    private String email, password ,name;
     private Client client;
     
     public void switchTologin(ActionEvent event) throws IOException{//login Screen
@@ -111,16 +111,6 @@ public class Signup_ScreenController {
         return valid;  
     }
     
-    public static String getEmail() {
-        return email;
-    }
-    public static String getPassword() {
-        return password;
-    }
-    public static String getName() {
-        return name;
-    }
-    
     public void createNewAccount(ActionEvent event) throws IOException
     {
         email = field_Email.getText();
@@ -131,7 +121,7 @@ public class Signup_ScreenController {
             client = new Client();
             if(client.isServerConnected())
             {
-                client.SignUp();
+                client.SignUp(email, name, password);
                 if (client.isopSuccess()) {
                     //login Page
                     root = FXMLLoader.load(getClass().getResource("/Screens/Login_Screen.fxml"));

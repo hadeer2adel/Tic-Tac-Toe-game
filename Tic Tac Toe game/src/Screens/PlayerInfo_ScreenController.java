@@ -5,6 +5,7 @@
  */
 package Screens;
 
+import DTO.ConnectedClient;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -61,7 +62,7 @@ public class PlayerInfo_ScreenController implements  Initializable  {
         FileInputStream fis = null;
         try {
 
-            File f = new File("playerData.json");
+            File f = new File("Files/playerData"+ConnectedClient.getClient().getId()+".json");
             fis = new FileInputStream(f);
             JsonReader reader = Json.createReader(fis);
             JsonStructure jsonSt = reader.read();

@@ -31,7 +31,6 @@ public class WaitMessage_ScreenController{
     private Parent root;
     
     public void openInvitationScreen() {
-        System.out.println("Screens.WaitMessage_ScreenController.openInvitationScreen()");
         try {
             root = FXMLLoader.load(getClass().getResource("/Screens/Invitation_Screen1.fxml"));
             scene = new Scene(root);

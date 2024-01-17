@@ -31,8 +31,7 @@ public class Login_ScreenController {
     private Scene scene;
     private Parent root;
     
-    private static String email, password;
-    private static boolean successLogin = false;
+    private String email, password;
     private Client client;
 
     @FXML
@@ -63,16 +62,6 @@ public class Login_ScreenController {
         return valid;
     }
 
-    public static void SuccessLogin() {
-        successLogin = true;
-    }
-    public static String getEmail() {
-        return email;
-    }
-    public static String getPassword() {
-        return password;
-    }
-
     public void switchToInviation(ActionEvent event) throws IOException, InterruptedException{//inviation Screen
         email = field_Email.getText();
         password = field_Password.getText();
@@ -80,8 +69,9 @@ public class Login_ScreenController {
             client = new Client();
             ConnectedClient.setClient(client);
             if(client.isServerConnected()){
-                client.Login();
+                client.Login(email, password);
                 if (client.isopSuccess()) {
+                    client.getAvailablePlayers();
                     root = FXMLLoader.load(getClass().getResource("/Screens/Invitation_Screen1.fxml"));
                     scene = new Scene(root);
                     stage.setScene(scene);
