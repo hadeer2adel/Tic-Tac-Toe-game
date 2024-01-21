@@ -42,14 +42,16 @@ public class Invite_buttonController {
 
     public void setData(UserData p) {
         name.setText(p.getName());
-        btn_invite.setId(""+p.getId());
+        btn_invite.setId(""+p.getId()+","+p.getName());
     }
 
     public void invitation(ActionEvent event) throws IOException{
         openWaitScreen();
         Client client = ConnectedClient.getClient();
         if(client.isServerConnected()){
-            client.sendInvitation(Integer.parseInt(btn_invite.getId()));
+            String player = btn_invite.getId();
+            String [] playerData = player.split(",");
+            client.sendInvitation(Integer.parseInt(playerData[0]),playerData[1]);
         }
         else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -61,7 +63,6 @@ public class Invite_buttonController {
     } 
 
     public void openWaitScreen() {
-        System.out.println("Screens.Invitation_Screen1Controller.openWaitScreen()");
         try {
             root = FXMLLoader.load(getClass().getResource("/Screens/WaitMessage_Screen.fxml"));
             scene = new Scene(root);

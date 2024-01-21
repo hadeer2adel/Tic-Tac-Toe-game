@@ -8,6 +8,7 @@ package DTO;
 import Screens.Invitation_Screen1Controller;
 import Screens.Invite_buttonController;
 import Screens.Login_ScreenController;
+import Screens.Online_Game_ScreenController;
 import Screens.Response_ScreenController;
 import Screens.Signup_ScreenController;
 import Screens.WaitMessage_ScreenController;
@@ -20,6 +21,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.math.BigDecimal;
 import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -130,7 +132,7 @@ public class Client implements Runnable {
                     break;
                 case "logout":
                     messages.put(responseJson);
-                    break;
+                    break;      
                 default:
                     System.out.println("Unknown response type: " + responseType);
                     break;
@@ -147,6 +149,9 @@ public class Client implements Runnable {
             case "invite":
                 receiveInvitation(requestJson);
                 break;
+            case "move":
+                receiveMove(requestJson);
+            break;
             default:
                 System.out.println("Unknown response type: " + requestJson);
                 break;
@@ -210,6 +215,7 @@ public class Client implements Runnable {
 
     public void getAvailablePlayers() {
         try {
+            opSuccess = false;
             JsonObject requestJson = Json.createObjectBuilder()
                     .add("request", "availablePlayers")
                     .add("id", id)
@@ -220,6 +226,7 @@ public class Client implements Runnable {
             JsonObject responseJson = messages.take();
             String status = responseJson.getString("status");
             if (status.equals("success")) {
+                opSuccess = true;
                 FileWriter writer = new FileWriter("Files/availablePlayers"+id+".json");
                 writer.write(responseJson.toString());
                 writer.close();
@@ -231,7 +238,7 @@ public class Client implements Runnable {
         }
     }
 
-    public void sendInvitation(int id2) {
+    public void sendInvitation(int id2, String name2) {
         System.out.println("DTO.Client.sendInvitation()");
         opSuccess = false;
         try {
@@ -245,6 +252,7 @@ public class Client implements Runnable {
                     .add("id1", id1)
                     .add("id2", id2)
                     .add("name1", name1)
+                    .add("name2", name2)
                     .build();
 
             mouth.writeUTF(requestJson.toString());
@@ -260,7 +268,10 @@ public class Client implements Runnable {
         if (opSuccess) {
             Platform.runLater(() -> {
                 WaitMessage_ScreenController controller = new WaitMessage_ScreenController();
-                controller.openGameScreen();
+                controller.openGameScreen(responseJson.getInt("id1"),
+                                responseJson.getString("name1"),
+                                responseJson.getInt("id2"),
+                                responseJson.getString("name2"));
             });
         } else {
             Platform.runLater(() -> {
@@ -274,7 +285,6 @@ public class Client implements Runnable {
         System.out.println("DTO.Client.receiveInvitation()");
 
         Platform.runLater(() -> {
-            Response_ScreenController.setPlayer(requestJson.getString("name1"));
             Response_ScreenController.setJson(requestJson);
             Invitation_Screen1Controller controller = new Invitation_Screen1Controller();
             controller.openResponeScreen();
@@ -290,6 +300,7 @@ public class Client implements Runnable {
                     .add("id1", requestJson.getInt("id1"))
                     .add("id2", requestJson.getInt("id2"))
                     .add("name1", requestJson.getString("name1"))
+                    .add("name2", requestJson.getString("name2"))
                     .build();
 
             mouth.writeUTF(responseJson.toString());
@@ -325,6 +336,34 @@ public class Client implements Runnable {
         } catch (InterruptedException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void sendMove(int  player1Id ,int player2Id, int move , String ch, boolean isGameEnd){
+        System.out.println("DTO.Client.sendMove()");
+        opSuccess = false;
+        try {
+            JsonObject requestJson = Json.createObjectBuilder()
+                    .add("request", "move")
+                    .add("player1Id", player1Id)
+                    .add("player2Id", player2Id)
+                    .add("character", ch )
+                    .add("move", move)
+                    .add("isGameEnd", isGameEnd)
+                    .build();
+            mouth.writeUTF(requestJson.toString());
+            mouth.flush();
+
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void receiveMove(JsonObject requestJson) {
+        Platform.runLater(() -> 
+        {
+            Online_Game_ScreenController controller = new Online_Game_ScreenController();
+            controller.onlyDraw(requestJson.getInt("move"), requestJson.getString("character"), requestJson.getBoolean("isGameEnd"));
+        });
     }
         
 }

@@ -7,6 +7,8 @@ package Screens;
 
 import DTO.Client;
 import DTO.ConnectedClient;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +20,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import javax.json.JsonStructure;
 
 /**
  * FXML Controller class
@@ -41,9 +47,11 @@ public class WaitMessage_ScreenController{
         }
     }
     
-    public void openGameScreen() {
+    public void openGameScreen(int id1, String name1, int id2, String name2) {
         try {
-            root = FXMLLoader.load(getClass().getResource("/Screens/Game_Screen.fxml"));
+            Online_Game_ScreenController.setGame(id1, name1, id2, name2);
+            
+            root = FXMLLoader.load(getClass().getResource("/Screens/Online_Game_Screen.fxml"));
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();

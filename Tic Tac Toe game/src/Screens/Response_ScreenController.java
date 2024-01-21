@@ -7,6 +7,8 @@ package Screens;
 
 import DTO.Client;
 import DTO.ConnectedClient;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,7 +24,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javax.json.Json;
 import javax.json.JsonObject;
+import javax.json.JsonReader;
+import javax.json.JsonStructure;
 
 /**
  * FXML Controller class
@@ -34,19 +39,14 @@ public class Response_ScreenController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    private static String name1;
     private Client client;
-    private static JsonObject jsonObject;
+    static JsonObject jsonObject;
     private Stage stage = Mainpkg.Main.getAppStage();;
     private Scene scene;
     private Parent root;
     
     @FXML
     private Label nameOfPlayer;
-    
-    public static void setPlayer(String name1){
-        Response_ScreenController.name1 = name1;
-    }
     
     public static void setJson (JsonObject jo){
         Response_ScreenController.jsonObject = jo;
@@ -56,7 +56,7 @@ public class Response_ScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("Screens.Response_ScreenController.initialize()");
         client = ConnectedClient.getClient();
-        nameOfPlayer.setText(name1);
+        nameOfPlayer.setText(jsonObject.getString("name1"));
     }  
     
     public void acceptInvitation(ActionEvent event) throws IOException, InterruptedException{//inviation Screen
@@ -101,7 +101,12 @@ public class Response_ScreenController implements Initializable {
     
     public void openGameScreen() {
         try {
-            root = FXMLLoader.load(getClass().getResource("/Screens/Game_Screen.fxml"));
+            Online_Game_ScreenController.setGame(jsonObject.getInt("id1"),
+                                jsonObject.getString("name1"),
+                                jsonObject.getInt("id2"),
+                                jsonObject.getString("name2"));
+            
+            root = FXMLLoader.load(getClass().getResource("/Screens/Online_Game_Screen.fxml"));
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
