@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="3">
+        <file>
+            <url>src/DTO/Client.java</url>
+            <bookmark id="3">
+                <name/>
+                <line>185</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/ITI/Developing%20Applications%20using%20Java%20SE/Project/Project/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Online_Game_ScreenController.java</file>
-            <file>file:/D:/ITI/Developing%20Applications%20using%20Java%20SE/Project/Project/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/DTO/Client.java</file>
-        </group>
         <group>
             <file>file:/D:/ITI/Developing%20Applications%20using%20Java%20SE/Project/Project/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Invitation_Screen1Controller.java</file>
             <file>file:/D:/ITI/Developing%20Applications%20using%20Java%20SE/Project/Project/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Game_ScreenController.java</file>
@@ -19,6 +24,10 @@
         <group>
             <file>file:/D:/ITI/Developing%20Applications%20using%20Java%20SE/Project/Project/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Online_Game_ScreenController.java</file>
             <file>file:/D:/ITI/Developing%20Applications%20using%20Java%20SE/Project/Project/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/DTO/Client.java</file>
+        </group>
+        <group>
+            <file>file:/D:/ITI%20-%20Native%20Mobile%20Application/Java/Tic%20Tac%20Toe%20game%20-%20Java%20project/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/DTO/Client.java</file>
+            <file>file:/D:/ITI%20-%20Native%20Mobile%20Application/Java/Tic%20Tac%20Toe%20game%20-%20Java%20project/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Online_Video_ScreenController.java</file>
         </group>
     </open-files>
 </project-private>

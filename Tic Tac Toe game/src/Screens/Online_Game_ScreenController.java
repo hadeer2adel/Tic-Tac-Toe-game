@@ -128,6 +128,9 @@ public class Online_Game_ScreenController implements Initializable {
         
         btnsClicked = 0;
         isGameEnd = false;
+        for(int i=0; i<gameboard.length; i++)
+            gameboard[i]="";
+        
         if(client.getId() == game.getPlayerId_2()){
             System.out.println("Screens.Online_Game_ScreenController.initialize()-------------------11");
             sentMovePrepare(true);
@@ -201,7 +204,6 @@ public class Online_Game_ScreenController implements Initializable {
     public void onlyDraw(int move , String ch, boolean end) {
         isGameEnd = end;
         sentMovePrepare(false);
-        System.out.println("Screens.Online_Game_ScreenController.onlyDraw()------------------tt");
         btnsClicked++;
         
         if(ch.equals("x"))
@@ -213,7 +215,7 @@ public class Online_Game_ScreenController implements Initializable {
         
         if (!isGameEnd && btnsClicked == 9) {
             isGameEnd = true;
-            Online_Video_ScreenController.setData("It's Draw", "draw");
+            Online_Video_ScreenController.setData("It's Draw", "draw", game);
             try {
                 switchToVideoScreen();
             } catch (IOException ex) {
@@ -221,7 +223,7 @@ public class Online_Game_ScreenController implements Initializable {
             }
         }
         else if(isGameEnd){
-            Online_Video_ScreenController.setData("You Lose", "loss");
+            Online_Video_ScreenController.setData("You Lose", "loss", game);
             try {
                 switchToVideoScreen();
             } catch (IOException ex) {
@@ -322,7 +324,7 @@ public class Online_Game_ScreenController implements Initializable {
             if (Winner.equals("x")) {
                 game.updatePlayerScore_1();
                 isGameEnd = true;
-                Online_Video_ScreenController.setData("You Win", "win");
+                Online_Video_ScreenController.setData("You Win", "win", game);
                 try {
                     switchToVideoScreen();
                 } catch (IOException ex) {
@@ -331,7 +333,7 @@ public class Online_Game_ScreenController implements Initializable {
             } else if (Winner.equals("o")) {
                 game.updatePlayerScore_2();
                 isGameEnd = true;
-                Online_Video_ScreenController.setData("You Win", "win");
+                Online_Video_ScreenController.setData("You Win", "win", game);
                 try {
                     switchToVideoScreen();
                 } catch (IOException ex) {
@@ -340,7 +342,7 @@ public class Online_Game_ScreenController implements Initializable {
             }
         }
         if ((!isGameEnd) && btnsClicked == 9) {
-            Online_Video_ScreenController.setData("It's Draw", "draw");
+            Online_Video_ScreenController.setData("It's Draw", "draw", game);
             try {
                 switchToVideoScreen();
             } catch (IOException ex) {
@@ -363,9 +365,5 @@ public class Online_Game_ScreenController implements Initializable {
             }
         });
         delay.play();
-    }
-   
-    public static void setJson (JsonObject jo){
-        Response_ScreenController.jsonObject = jo;
     }
 }

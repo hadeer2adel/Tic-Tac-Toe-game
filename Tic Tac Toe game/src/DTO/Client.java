@@ -9,6 +9,7 @@ import Screens.Invitation_Screen1Controller;
 import Screens.Invite_buttonController;
 import Screens.Login_ScreenController;
 import Screens.Online_Game_ScreenController;
+import Screens.Online_Video_ScreenController;
 import Screens.Response_ScreenController;
 import Screens.Signup_ScreenController;
 import Screens.WaitMessage_ScreenController;
@@ -132,7 +133,9 @@ public class Client implements Runnable {
                     break;
                 case "logout":
                     messages.put(responseJson);
-                    break;      
+                    break;
+                case "playAgain":
+                    playAgainHandeler(responseJson);
                 default:
                     System.out.println("Unknown response type: " + responseType);
                     break;
@@ -151,7 +154,10 @@ public class Client implements Runnable {
                 break;
             case "move":
                 receiveMove(requestJson);
-            break;
+                break;
+            case "playAgain":
+                receivePlayAgain(requestJson);
+                break;
             default:
                 System.out.println("Unknown response type: " + requestJson);
                 break;
@@ -364,6 +370,72 @@ public class Client implements Runnable {
             Online_Game_ScreenController controller = new Online_Game_ScreenController();
             controller.onlyDraw(requestJson.getInt("move"), requestJson.getString("character"), requestJson.getBoolean("isGameEnd"));
         });
+    }
+    
+    public void playAgain(int replay, GameDetails game){
+        System.out.println("DTO.Client.playAgain()");
+        opSuccess = false;
+        try {
+            JsonObject requestJson = Json.createObjectBuilder()
+                    .add("request", "playAgain")
+                    .add("replay", replay)
+                    .add("myID", id)
+                    .add("id1", game.getPlayerId_1())
+                    .add("id2", game.getPlayerId_2())
+                    .add("score1", game.getPlayerScore_1())
+                    .add("score2", game.getPlayerScore_2())
+                    .build();
+
+            mouth.writeUTF(requestJson.toString());
+            mouth.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void playAgainHandeler(JsonObject responseJson) {
+        System.out.println("DTO.Client.playAgainHandeler()");
+        opSuccess = responseJson.getBoolean("status");
+        if (opSuccess) {
+            Platform.runLater(() -> {
+                Online_Video_ScreenController controller = new Online_Video_ScreenController();
+                controller.openGameScreen();
+            });
+        } else {
+            Platform.runLater(() -> {
+                Online_Video_ScreenController controller = new Online_Video_ScreenController();
+                controller.openInvitationScreen();
+            });
+        }
+    }
+
+    public void receivePlayAgain(JsonObject requestJson) {
+        System.out.println("DTO.Client.receivePlayAgain()");
+        int replay = requestJson.getInt("replay");
+        Platform.runLater(() -> {
+            Online_Video_ScreenController.setReplay(replay);
+            Online_Video_ScreenController.setJson(requestJson);
+        });
+    }
+
+    public void receivePlayAgainHandeler(JsonObject requestJson, boolean accepted) {
+        System.out.println("DTO.Client.receivePlayAgainHandeler()");
+        try {
+            JsonObject responseJson = Json.createObjectBuilder()
+                    .add("response", "playAgain")
+                    .add("status", accepted)
+                    .add("myID", id)
+                    .add("id1", requestJson.getInt("id1"))
+                    .add("id2", requestJson.getInt("id2"))
+                    .add("score1", requestJson.getInt("score1"))
+                    .add("score2", requestJson.getInt("score2"))
+                    .build();
+
+            mouth.writeUTF(responseJson.toString());
+            mouth.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
         
 }
