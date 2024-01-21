@@ -32,13 +32,12 @@ public class Pc_GameController implements Initializable {
 
     private int btnsClicked;
     private boolean X_or_O, isGameEnd = false;
-    
+
     private static String level;
-    
+
     public static void setLevel(String s) {
         level = s;
     }
-    
 
     @FXML
     private Label label1, label3;
@@ -58,7 +57,6 @@ public class Pc_GameController implements Initializable {
         label3.setText(game.getPlayerName_2());
         label2.setText("" + game.getPlayerScore_1());
         label4.setText("" + game.getPlayerScore_2());
-        
 
         xImage = new Image(getClass().getResourceAsStream("/Images/X (7).png"));
         oImage = new Image(getClass().getResourceAsStream("/Images/o.png"));
@@ -110,8 +108,8 @@ public class Pc_GameController implements Initializable {
         if (buttonIndex >= 0 && buttonIndex < gameBtn.length && gameboard[buttonIndex].equals("")) {
             gameBtn[buttonIndex] = (Button) event.getSource();
             drawXorO(buttonIndex, event);
-            
-            switch(level){
+
+            switch (level) {
                 case "easy":
                     System.out.println("------------------------easy");
                     computerEasyMove(event);
@@ -121,89 +119,138 @@ public class Pc_GameController implements Initializable {
                     computerHardMove(event);
                     break;
             }
-   
+
         }
     }
 
-  public void computerEasyMove(ActionEvent event) {
-        if (!isGameEnd) {
+    public void computerEasyMove(ActionEvent event) {
+        if (!isGameEnd && btnsClicked < 9) {
             int randomNum;
             do {
                 randomNum = getRandomNum();
             } while (!gameboard[randomNum].equals(""));
             gameboard[randomNum] = "o";
             drawXorO(randomNum, event);
-            btnsClicked++;
+
         }
     }
-  
-    public void computerHardMove(ActionEvent event) {
-    if (!isGameEnd) {
-        int bestMove = getBestMove();
-        gameboard[bestMove] = "o";
-        drawXorO(bestMove, event);
-        btnsClicked++;
-    }
-    System.out.println("------------------------cpmmove");
-}
 
-private int getBestMove() {
-    int bestScore = Integer.MIN_VALUE;
-    int bestMove = -1;
+    /* public void computerHardMove(ActionEvent event) {
+        if (!isGameEnd && btnsClicked < 9) {
+            int bestMove;
+            do {
+                bestMove = getBestMove();
+            } while (!gameboard[bestMove].equals(""));
+            gameboard[bestMove] = "o";
+            drawXorO(bestMove, event);
 
-    for (int i = 0; i < 9; i++) {
-        if (gameboard[i].equals("")) {
-            gameboard[i] = "o";
-            int score = minimax(0, false);
-            gameboard[i] = "";
-
-            if (score > bestScore) {
-                bestScore = score;
-                bestMove = i;
-            }
         }
+        System.out.println("------------------------cpmmove");
     }
-    return bestMove;
-    
-}
 
- private int minimax(int depth, boolean isMaximizing) {
-     /*
-    String winner = isWin();
-    if (winner.equals("x")) {
-        return -10 + depth; // Human wins
-    } else if (winner.equals("o")) {
-        return 10 - depth; // PC wins
-    } else if (btnsClicked == 9) {
-        return 0; // Draw
-    }*/
-
-    if (isMaximizing) {
+    private int getBestMove() {
         int bestScore = Integer.MIN_VALUE;
+        int bestMove = -1;
+
         for (int i = 0; i < 9; i++) {
             if (gameboard[i].equals("")) {
                 gameboard[i] = "o";
-                int score = minimax(depth + 1, false);
+                int score = minimax(0, false);
                 gameboard[i] = "";
-                bestScore = Math.max(score, bestScore);
+
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMove = i;
+                }
             }
         }
-        return bestScore;
-    } else {
-        int bestScore = Integer.MAX_VALUE;
+        return bestMove;
+
+    }
+
+    private int minimax(int depth, boolean isMaximizing) {
+
+        String winner = isWin();
+        if ("x".equals(winner)) {
+            return -10 + depth; // Human wins
+        } else if ("o".equals(winner)) {
+            return 10 - depth; // PC wins
+        } else if (btnsClicked == 9) {
+            return 0; // Draw
+        }
+
+        if (isMaximizing) {
+            int bestScore = Integer.MIN_VALUE;
+            for (int i = 0; i < 9; i++) {
+                if (gameboard[i].equals("")) {
+                    gameboard[i] = "o";
+                    int score = minimax(depth + 1, false);
+                    gameboard[i] = "";
+                    bestScore = Math.max(score, bestScore);
+                }
+            }
+            return bestScore;
+        } else {
+            int bestScore = Integer.MAX_VALUE;
+            for (int i = 0; i < 9; i++) {
+                if (gameboard[i].equals("")) {
+                    gameboard[i] = "x";
+                    int score = minimax(depth + 1, true);
+                    gameboard[i] = "";
+                    bestScore = Math.min(score, bestScore);
+                }
+            }
+            return bestScore;
+        }
+    }
+     */
+    public void computerHardMove(ActionEvent event) {
+        if (!isGameEnd && btnsClicked < 9) {
+            int bestMove = getBestMove();
+
+            gameboard[bestMove] = "o";
+            drawXorO(bestMove, event);
+        }
+    }
+
+    private int getBestMove() {
+        int[] result = minimax(0, true);
+        return result[1];
+    }
+
+    private int[] minimax(int depth, boolean isMaximizing) {
+        int[] bestMove = new int[]{isMaximizing ? Integer.MIN_VALUE : Integer.MAX_VALUE, -1};
+
         for (int i = 0; i < 9; i++) {
             if (gameboard[i].equals("")) {
-                gameboard[i] = "x";
-                int score = minimax(depth + 1, true);
+                gameboard[i] = isMaximizing ? "o" : "x";
+
+                String win = checkWin();
+
+                if (win.equals("o")) {
+                    gameboard[i] = "";
+                    return new int[]{10 - depth, i};
+                } else if (win.equals("x")) {
+                    gameboard[i] = "";
+                    return new int[]{-10 + depth, i};
+                } else if (btnsClicked == 9) {
+                    gameboard[i] = "";
+                    return new int[]{0, i};
+                }
+
+                int[] score = minimax(depth + 1, !isMaximizing);
+
                 gameboard[i] = "";
-                bestScore = Math.min(score, bestScore);
+
+                if ((isMaximizing && score[0] > bestMove[0]) || (!isMaximizing && score[0] < bestMove[0])) {
+                    bestMove[0] = score[0];
+                    bestMove[1] = i;
+                }
             }
         }
-        return bestScore;
-    }
- }
-    
 
+        return bestMove;
+    }
 
     private void drawXorO(int n, ActionEvent event) {
         btnsClicked++;
@@ -243,10 +290,10 @@ private int getBestMove() {
                     } catch (IOException ex) {
                         Logger.getLogger(Pc_GameController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+
                 }
             }
-               if ((!isGameEnd) && btnsClicked == 9) {
+            if ((!isGameEnd) && btnsClicked == 9) {
                 isGameEnd = true;
                 Video_ScreenController.setData("It's Draw", "draw", "pc");
                 try {
@@ -268,7 +315,7 @@ private int getBestMove() {
 
         if ((!gameboard[0].equals("")) && gameboard[0].equals(gameboard[4]) && gameboard[0].equals(gameboard[8])) {
             win = gameboard[0]; // Diagonal 1
-            drawLine(0, 4, 8);
+           drawLine(0, 4, 8);
         } else if ((!gameboard[2].equals("")) && gameboard[2].equals(gameboard[4]) && gameboard[2].equals(gameboard[6])) {
             win = gameboard[2]; // Diagonal 2
             drawLine(2, 4, 6);
@@ -276,11 +323,34 @@ private int getBestMove() {
             for (int i = 0, j = 0; i < 9 || j < 3; i += 3, j += 1) {
                 if ((!gameboard[i].equals("")) && gameboard[i].equals(gameboard[i + 1]) && gameboard[i].equals(gameboard[i + 2])) {
                     win = gameboard[i]; // Row
-                    drawLine(i, i + 1, i + 2);
+                   drawLine(i, i + 1, i + 2);
                     break;
                 } else if ((!gameboard[j].equals("")) && gameboard[j].equals(gameboard[j + 3]) && gameboard[j].equals(gameboard[j + 6])) {
                     win = gameboard[j]; // Column
-                    drawLine(j, j + 3, j + 6);
+                   drawLine(j, j + 3, j + 6);
+                    break;
+                }
+            }
+        }
+        return win;
+    }
+        private String checkWin() {
+        String win = "";
+
+        if ((!gameboard[0].equals("")) && gameboard[0].equals(gameboard[4]) && gameboard[0].equals(gameboard[8])) {
+            win = gameboard[0]; // Diagonal 1
+          
+        } else if ((!gameboard[2].equals("")) && gameboard[2].equals(gameboard[4]) && gameboard[2].equals(gameboard[6])) {
+            win = gameboard[2]; // Diagonal 2
+           
+        } else {
+            for (int i = 0, j = 0; i < 9 || j < 3; i += 3, j += 1) {
+                if ((!gameboard[i].equals("")) && gameboard[i].equals(gameboard[i + 1]) && gameboard[i].equals(gameboard[i + 2])) {
+                    win = gameboard[i]; // Row
+                    break;
+                } else if ((!gameboard[j].equals("")) && gameboard[j].equals(gameboard[j + 3]) && gameboard[j].equals(gameboard[j + 6])) {
+                    win = gameboard[j]; // Column
+                  
                     break;
                 }
             }
