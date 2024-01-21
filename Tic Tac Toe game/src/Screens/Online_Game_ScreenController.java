@@ -292,6 +292,78 @@ public class Online_Game_ScreenController implements Initializable {
         }
         return win;
     }
+     @FXML
+    private void DrawXorO(int n) {
+        btnsClicked++;
+        if (!isGameEnd) {
+            if (game.getPlayerId_1() == client.getId()) {
+                gameboard[n] = "x";
+                showImage(gameboard[n], gameBtn[n]);
+                sentMovePrepare(true);
+                checkWinner();
+                client.sendMove(game.getPlayerId_1(), game.getPlayerId_2(), n, gameboard[n], isGameEnd);
+            } else {
+                gameboard[n] = "o";
+                showImage(gameboard[n], gameBtn[n]);
+                sentMovePrepare(true);
+                checkWinner();
+                client.sendMove(game.getPlayerId_2(), game.getPlayerId_1(), n, gameboard[n], isGameEnd);
+            }
+        }
+        if (btnsClicked == 9) {
+            isGameEnd = true;
+        }
+    }
+
+    public void checkWinner() {
+
+        if (btnsClicked > 4) {
+            String Winner = isWin();
+            if (Winner.equals("x")) {
+                game.updatePlayerScore_1();
+                isGameEnd = true;
+                Video_ScreenController.setData("You Win", "win");
+                try {
+                    switchToVideoScreen();
+                } catch (IOException ex) {
+                    Logger.getLogger(Game_ScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (Winner.equals("o")) {
+                game.updatePlayerScore_2();
+                isGameEnd = true;
+                Video_ScreenController.setData("You Win", "win");
+                try {
+                    switchToVideoScreen();
+                } catch (IOException ex) {
+                    Logger.getLogger(Game_ScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        if ((!isGameEnd) && btnsClicked == 9) {
+            Video_ScreenController.setData("It's Draw", "draw");
+            try {
+                switchToVideoScreen();
+            } catch (IOException ex) {
+                Logger.getLogger(Game_ScreenController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void switchToVideoScreen() throws IOException {
+
+        PauseTransition delay = new PauseTransition(Duration.seconds(1));
+        delay.setOnFinished(e -> {
+            try {
+                root = FXMLLoader.load(getClass().getResource("/Screens/Video_Screen.fxml"));
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        delay.play();
+    }
    
     public static void setJson (JsonObject jo){
         Response_ScreenController.jsonObject = jo;
