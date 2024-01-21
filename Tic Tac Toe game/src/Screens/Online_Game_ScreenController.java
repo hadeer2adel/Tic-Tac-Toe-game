@@ -10,6 +10,8 @@ import DTO.ConnectedClient;
 import DTO.GameDetails;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -40,6 +43,8 @@ public class Online_Game_ScreenController implements Initializable {
     private Stage stage = Mainpkg.Main.getAppStage();
     private Scene scene;
     private Parent root;
+    
+    private static String movesList;
     
     @FXML
     private StackPane stackPane1;
@@ -92,6 +97,9 @@ public class Online_Game_ScreenController implements Initializable {
                                   "", "", "",
                                   "", "", "",};
     
+    private static String recordName;
+    private static boolean recorded;
+    
 
     public static void setGame(int id1, String name1, int id2, String name2 ) {
         game = new GameDetails(id1, name1, id2, name2);
@@ -132,7 +140,18 @@ public class Online_Game_ScreenController implements Initializable {
             System.out.println("Screens.Online_Game_ScreenController.initialize()-------------------11");
             sentMovePrepare(true);
         }
+        
+        recordName = game.getPlayerName_1() + " vs " + game.getPlayerName_2();
+        movesList="";
+        recorded=false;
     }   
+    
+    public void start_record(ActionEvent event) throws IOException{
+        recorded=true;
+        Button btn=(Button)event.getSource();
+        btn.setText("Recording");
+        btn.setDisable(true);
+    }
     
     public void clickBtn1() {
         int n = 0;
@@ -196,6 +215,29 @@ public class Online_Game_ScreenController implements Initializable {
             DrawXorO(n);
         }
     }
+    
+    public void beginconnect(){
+       
+            if(client.isServerConnected())
+            {
+                client.record(recordName,movesList,client.getId());
+                if (client.isopSuccess()) {
+                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Record");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Record scccessed.");
+                    alert.showAndWait();
+                } 
+                else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Record");
+                    alert.setHeaderText(null);
+                    alert.setContentText("fail to record");
+                    alert.showAndWait();
+                }
+            }          
+   
+   }
    
   
     public void onlyDraw(int move , String ch, boolean end) {
@@ -204,15 +246,24 @@ public class Online_Game_ScreenController implements Initializable {
         System.out.println("Screens.Online_Game_ScreenController.onlyDraw()------------------tt");
         btnsClicked++;
         
-        if(ch.equals("x"))
+        if(ch.equals("x")){
             gameboard[move] = "x";
-        else 
+            String moves="x"+"&"+move+",";
+            movesList+=moves;
+        }else{ 
            gameboard[move] = "o";
-        
+           String moves="o"+"&"+move+",";
+           movesList+=moves;
+        }
         showImage(gameboard[move], gameBtn[move]);
         
         if (!isGameEnd && btnsClicked == 9) {
             isGameEnd = true;
+            
+            if(recorded){
+                     beginconnect();
+                    }
+            
             Video_ScreenController.setData("It's Draw", "draw");
             try {
                 switchToVideoScreen();
@@ -221,6 +272,9 @@ public class Online_Game_ScreenController implements Initializable {
             }
         }
         else if(isGameEnd){
+            if(recorded){
+                     beginconnect();
+                    }
             Video_ScreenController.setData("You Lose", "loss");
             try {
                 switchToVideoScreen();
@@ -298,12 +352,16 @@ public class Online_Game_ScreenController implements Initializable {
         if (!isGameEnd) {
             if (game.getPlayerId_1() == client.getId()) {
                 gameboard[n] = "x";
+                String moves="x"+"&"+n+",";
+                movesList+=moves;
                 showImage(gameboard[n], gameBtn[n]);
                 sentMovePrepare(true);
                 checkWinner();
                 client.sendMove(game.getPlayerId_1(), game.getPlayerId_2(), n, gameboard[n], isGameEnd);
             } else {
                 gameboard[n] = "o";
+                String moves="o"+"&"+n+",";
+                movesList+=moves;
                 showImage(gameboard[n], gameBtn[n]);
                 sentMovePrepare(true);
                 checkWinner();
@@ -322,6 +380,11 @@ public class Online_Game_ScreenController implements Initializable {
             if (Winner.equals("x")) {
                 game.updatePlayerScore_1();
                 isGameEnd = true;
+                
+                if(recorded){
+                     beginconnect();
+                    }
+                
                 Video_ScreenController.setData("You Win", "win");
                 try {
                     switchToVideoScreen();
@@ -331,6 +394,11 @@ public class Online_Game_ScreenController implements Initializable {
             } else if (Winner.equals("o")) {
                 game.updatePlayerScore_2();
                 isGameEnd = true;
+                
+                if(recorded){
+                     beginconnect();
+                    }
+                
                 Video_ScreenController.setData("You Win", "win");
                 try {
                     switchToVideoScreen();
@@ -340,6 +408,11 @@ public class Online_Game_ScreenController implements Initializable {
             }
         }
         if ((!isGameEnd) && btnsClicked == 9) {
+            
+            if(recorded){
+                     beginconnect();
+                    }
+            
             Video_ScreenController.setData("It's Draw", "draw");
             try {
                 switchToVideoScreen();

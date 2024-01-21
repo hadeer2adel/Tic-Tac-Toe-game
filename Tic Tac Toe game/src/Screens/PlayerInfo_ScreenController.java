@@ -5,6 +5,7 @@
  */
 package Screens;
 
+import DTO.Client;
 import DTO.ConnectedClient;
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javax.json.Json;
@@ -50,11 +52,22 @@ public class PlayerInfo_ScreenController implements  Initializable  {
         stage.setScene(scene);
         stage.show();
     } 
-     public void switchToRecords(ActionEvent event) throws IOException{//Invitation_Screen
-        root = FXMLLoader.load(getClass().getResource("/Screens/Records_Screen.fxml"));
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToRecords(ActionEvent event) throws IOException {//Invitation_Screen
+        Client client = ConnectedClient.getClient();
+        if (client.isServerConnected()) {
+            client.getAllRecords();
+            root = FXMLLoader.load(getClass().getResource("/Screens/Records_Screen.fxml"));
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Server");
+            alert.setHeaderText(null);
+            alert.setContentText("Server is OFF now");
+            alert.showAndWait();
+        }
+
     }
 
     

@@ -5,6 +5,7 @@
  */
 package DTO;
 
+import Screens.Game_ScreenController;
 import Screens.Invitation_Screen1Controller;
 import Screens.Invite_buttonController;
 import Screens.Login_ScreenController;
@@ -23,6 +24,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.math.BigDecimal;
 import java.net.Socket;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
@@ -34,6 +36,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Alert;
 import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.json.JsonStructure;
@@ -131,6 +135,12 @@ public class Client implements Runnable {
                     sendInvitationHandeler(responseJson);
                     break;
                 case "logout":
+                    messages.put(responseJson);
+                    break;      
+                case "record":
+                    messages.put(responseJson);
+                    break;
+                case "allRecords":
                     messages.put(responseJson);
                     break;      
                 default:
@@ -365,5 +375,58 @@ public class Client implements Runnable {
             controller.onlyDraw(requestJson.getInt("move"), requestJson.getString("character"), requestJson.getBoolean("isGameEnd"));
         });
     }
+    
+    public void record(String recordName,String movesList,int pid) {
+        System.out.println("DTO.Client.record()");
+        try {
+            opSuccess = false;
+            JsonObject requestJson = Json.createObjectBuilder()
+                    .add("request", "record")
+                    .add("recordName", recordName)
+                    .add("movesList", movesList)
+                    .add("id", pid)
+                    .build();
+            mouth.writeUTF(requestJson.toString());
+            mouth.flush();
+            
+            //Response
+            JsonObject responseJson = messages.take();
+            String status = responseJson.getString("status");
+            if (status.equals("success")) {
+                opSuccess = true;
+            } 
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }
+    
+    public void getAllRecords() {
+        try {
+            opSuccess = false;
+            JsonObject requestJson = Json.createObjectBuilder()
+                    .add("request", "allRecords")
+                    .add("id", id)
+                    .build();
+            mouth.writeUTF(requestJson.toString());
+            mouth.flush();
+
+            JsonObject responseJson = messages.take();
+            String status = responseJson.getString("status");
+            if (status.equals("success")) {
+                opSuccess = true;
+                FileWriter writer = new FileWriter("Files/allRecords"+id+".json");
+                writer.write(responseJson.toString());
+                writer.close();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
         
 }

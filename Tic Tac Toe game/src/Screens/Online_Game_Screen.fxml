@@ -34,7 +34,7 @@
                   <Font name="System Bold Italic" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btn_record" disable="true" layoutX="231.0" layoutY="347.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" styleClass="btn_Record" text="Record">
+            <Button fx:id="btn_record" layoutX="231.0" layoutY="347.0" mnemonicParsing="false" onAction="#start_record" prefHeight="39.0" prefWidth="138.0" styleClass="btn_Record" text="Record">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
                </font>
