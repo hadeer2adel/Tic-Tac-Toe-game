@@ -213,7 +213,7 @@ public class Online_Game_ScreenController implements Initializable {
         
         if (!isGameEnd && btnsClicked == 9) {
             isGameEnd = true;
-            Video_ScreenController.setData("It's Draw", "draw");
+            Online_Video_ScreenController.setData("It's Draw", "draw");
             try {
                 switchToVideoScreen();
             } catch (IOException ex) {
@@ -221,7 +221,7 @@ public class Online_Game_ScreenController implements Initializable {
             }
         }
         else if(isGameEnd){
-            Video_ScreenController.setData("You Lose", "loss");
+            Online_Video_ScreenController.setData("You Lose", "loss");
             try {
                 switchToVideoScreen();
             } catch (IOException ex) {
@@ -322,7 +322,7 @@ public class Online_Game_ScreenController implements Initializable {
             if (Winner.equals("x")) {
                 game.updatePlayerScore_1();
                 isGameEnd = true;
-                Video_ScreenController.setData("You Win", "win");
+                Online_Video_ScreenController.setData("You Win", "win");
                 try {
                     switchToVideoScreen();
                 } catch (IOException ex) {
@@ -331,7 +331,7 @@ public class Online_Game_ScreenController implements Initializable {
             } else if (Winner.equals("o")) {
                 game.updatePlayerScore_2();
                 isGameEnd = true;
-                Video_ScreenController.setData("You Win", "win");
+                Online_Video_ScreenController.setData("You Win", "win");
                 try {
                     switchToVideoScreen();
                 } catch (IOException ex) {
@@ -340,7 +340,7 @@ public class Online_Game_ScreenController implements Initializable {
             }
         }
         if ((!isGameEnd) && btnsClicked == 9) {
-            Video_ScreenController.setData("It's Draw", "draw");
+            Online_Video_ScreenController.setData("It's Draw", "draw");
             try {
                 switchToVideoScreen();
             } catch (IOException ex) {
@@ -354,7 +354,7 @@ public class Online_Game_ScreenController implements Initializable {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
         delay.setOnFinished(e -> {
             try {
-                root = FXMLLoader.load(getClass().getResource("/Screens/Video_Screen.fxml"));
+                root = FXMLLoader.load(getClass().getResource("/Screens/Online_Video_Screen.fxml"));
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
