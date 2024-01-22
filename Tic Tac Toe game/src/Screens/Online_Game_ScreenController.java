@@ -273,6 +273,10 @@ public class Online_Game_ScreenController implements Initializable {
             if(recorded){
                 beginconnect();
             }
+            if(ConnectedClient.getClient().getId() == game.getPlayerId_1())
+                game.updatePlayerScore_2();
+            else
+                game.updatePlayerScore_1();
             Online_Video_ScreenController.setData("You Lose", "loss", game);
             try {
                 switchToVideoScreen();
