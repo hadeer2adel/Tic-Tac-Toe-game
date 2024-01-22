@@ -387,7 +387,7 @@ public class Pc_GameController implements Initializable {
         delay.play();
     }
 
-    public void switchToSinglemode(ActionEvent event) throws IOException{//single mode Screen
+    public void switchToSingleMode(ActionEvent event) throws IOException{//single mode Screen
         root = FXMLLoader.load(getClass().getResource("/Screens/SingleMode_Screen.fxml"));
         scene = new Scene(root);
         stage.setScene(scene);
