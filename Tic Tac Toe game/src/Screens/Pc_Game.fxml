@@ -29,25 +29,25 @@
                   <Image url="@../Images/vecteezy_robot-chatbot-icon-sign_4996790%201.png" />
                </image>
             </ImageView>
-            <Button fx:id="btn_back" layoutX="53.0" layoutY="347.0" mnemonicParsing="false" onAction="#switchToSinglemode" prefHeight="39.0" prefWidth="84.0" styleClass="btn_back" text="Back">
+            <Button fx:id="btn_back" layoutX="53.0" layoutY="347.0" mnemonicParsing="false" onAction="#switchToSingleMode" prefHeight="39.0" prefWidth="84.0" styleClass="btn_back" text="Back">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btn_record" layoutX="231.0" layoutY="347.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" styleClass="btn_Record" text="Record">
+            <Button fx:id="btn_record" disable="true" layoutX="231.0" layoutY="347.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" styleClass="btn_Record" text="Record">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btn1" layoutX="181.0" layoutY="130.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="65.0" styleClass="btn1" />
-            <Button fx:id="btn2" layoutX="258.0" layoutY="130.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="65.0" styleClass="btn2" />
-            <Button fx:id="btn3" layoutX="337.0" layoutY="130.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="65.0" styleClass="btn3" />
-            <Button fx:id="btn4" layoutX="181.0" layoutY="202.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="65.0" styleClass="btn1" />
-            <Button fx:id="btn5" layoutX="258.0" layoutY="202.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="65.0" styleClass="btn2" />
-            <Button fx:id="btn6" layoutX="337.0" layoutY="203.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="65.0" styleClass="btn3" />
-            <Button fx:id="btn7" layoutX="181.0" layoutY="271.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="65.0" styleClass="btn1" />
-            <Button fx:id="btn8" layoutX="258.0" layoutY="271.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="65.0" styleClass="btn2" />
-            <Button fx:id="btn9" layoutX="337.0" layoutY="271.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="65.0" styleClass="btn3" />
+            <Button fx:id="btn1" layoutX="181.0" layoutY="130.0" mnemonicParsing="false" onAction="#clickBtn1" prefHeight="58.0" prefWidth="65.0" styleClass="btn1" />
+            <Button fx:id="btn2" layoutX="258.0" layoutY="130.0" mnemonicParsing="false" onAction="#clickBtn2" prefHeight="58.0" prefWidth="65.0" styleClass="btn2" />
+            <Button fx:id="btn3" layoutX="337.0" layoutY="130.0" mnemonicParsing="false" onAction="#clickBtn3" prefHeight="58.0" prefWidth="65.0" styleClass="btn3" />
+            <Button fx:id="btn4" layoutX="181.0" layoutY="202.0" mnemonicParsing="false" onAction="#clickBtn4" prefHeight="58.0" prefWidth="65.0" styleClass="btn1" />
+            <Button fx:id="btn5" layoutX="258.0" layoutY="202.0" mnemonicParsing="false" onAction="#clickBtn5" prefHeight="58.0" prefWidth="65.0" styleClass="btn2" />
+            <Button fx:id="btn6" layoutX="337.0" layoutY="203.0" mnemonicParsing="false" onAction="#clickBtn6" prefHeight="58.0" prefWidth="65.0" styleClass="btn3" />
+            <Button fx:id="btn7" layoutX="181.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickBtn7" prefHeight="58.0" prefWidth="65.0" styleClass="btn1" />
+            <Button fx:id="btn8" layoutX="258.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickBtn8" prefHeight="58.0" prefWidth="65.0" styleClass="btn2" />
+            <Button fx:id="btn9" layoutX="337.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickBtn9" prefHeight="58.0" prefWidth="65.0" styleClass="btn3" />
             <Label fx:id="label1" layoutX="71.0" layoutY="221.0" text="Ahmed" textFill="WHITE">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
