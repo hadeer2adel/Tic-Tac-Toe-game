@@ -21,12 +21,12 @@
                   <Font name="System Bold Italic" size="24.0" />
                </font>
             </Button>
-            <Button fx:id="medium_btn" layoutX="200.0" layoutY="168.0" mnemonicParsing="false" onAction="#switchToPcGame" styleClass="large_btn" text="Medium">
+            <Button fx:id="medium_btn" layoutX="200.0" layoutY="168.0" mnemonicParsing="false" onAction="#switchToPcGameHard" styleClass="large_btn" text="Medium">
                <font>
                   <Font name="System Bold Italic" size="24.0" />
                </font>
             </Button>
-            <Button fx:id="hard_btn" layoutX="200.0" layoutY="270.0" mnemonicParsing="false" onAction="#switchToPcGame" styleClass="large_btn" text="Hard">
+            <Button fx:id="hard_btn" layoutX="200.0" layoutY="270.0" mnemonicParsing="false" onAction="#switchToPcGameHard" styleClass="large_btn" text="Hard">
                <font>
                   <Font name="System Bold Italic" size="24.0" />
                </font>

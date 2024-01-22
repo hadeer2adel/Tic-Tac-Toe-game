@@ -33,7 +33,7 @@ import javafx.stage.Stage;
  */
 public class TwoPlayerMode_ScreenController{
      
-    private Stage stage;
+    private Stage stage = Mainpkg.Main.getAppStage();
     private Scene scene;
     private Parent root;
     @FXML
@@ -65,7 +65,6 @@ public class TwoPlayerMode_ScreenController{
         else{
             Game_ScreenController.setPlayers(player1Name, player2Name);
             root = FXMLLoader.load(getClass().getResource("/Screens/Game_Screen.fxml"));
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -74,7 +73,6 @@ public class TwoPlayerMode_ScreenController{
     
     public void switchToHome(ActionEvent event) throws IOException{//Home Screen
         root = FXMLLoader.load(getClass().getResource("/Screens/Home_Screen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

@@ -38,7 +38,7 @@
                   <Font name="System Italic" size="15.0" />
                </font>
             </PasswordField>
-            <Button fx:id="btn_SignUp" layoutX="213.0" layoutY="323.0" mnemonicParsing="false" onAction="#switchTologin" prefHeight="40.0" prefWidth="213.0" style="-fx-background-color: rgba(252, 208, 21, 1); -fx-border-color: rgba(255, 255, 255, 1); -fx-background-radius: 20px; -fx-border-radius: 20px;" text="Sign Up">
+            <Button fx:id="btn_SignUp" layoutX="213.0" layoutY="323.0" mnemonicParsing="false" onAction="#createNewAccount" prefHeight="40.0" prefWidth="213.0" style="-fx-background-color: rgba(252, 208, 21, 1); -fx-border-color: rgba(255, 255, 255, 1); -fx-background-radius: 20px; -fx-border-radius: 20px;" text="Sign Up">
                <font>
                   <Font name="System Bold Italic" size="17.0" />
                </font>
