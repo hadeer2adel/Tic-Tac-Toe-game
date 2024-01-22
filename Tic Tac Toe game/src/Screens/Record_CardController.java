@@ -8,9 +8,11 @@ package Screens;
 import DTO.Client;
 import DTO.Records;
 import DTO.UserData;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -43,6 +45,17 @@ public class Record_CardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+    }
+    
+    @FXML
+    public void switchToShowRecord() throws IOException
+    {
+        System.out.println("switchToShowRecord to play video ");
+        Show_Records_ScreenController.setRecord(btn.getId());
+        Parent root = FXMLLoader.load(getClass().getResource("/Screens/Show_Records_Screen.fxml"));
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }
