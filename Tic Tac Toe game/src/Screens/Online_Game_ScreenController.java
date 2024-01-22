@@ -219,6 +219,7 @@ public class Online_Game_ScreenController implements Initializable {
     }
     
     public void beginconnect(){
+		client = ConnectedClient.getClient();
         if(client.isServerConnected())
         {
             client.record(recordName,movesList,client.getId());
