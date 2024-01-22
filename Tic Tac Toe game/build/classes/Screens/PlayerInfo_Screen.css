@@ -1,0 +1,15 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 7, 2024, 7:09:13 PM
+    Author     : win 10
+*/
+.effect
+{
+    -fx-background-color:linear-gradient(to bottom, darkblue, lightskyblue);
+    -fx-background-radius: 0px 100px 0px 100px;
+    -fx-effect: dropshadow(three-pass-box, darkblue, 10, 0, 0, 0);
+}

@@ -18,13 +18,12 @@ import javafx.stage.Stage;
 public class Home_ScreenController {
 
     
-     private Stage stage;
+     private Stage stage = Mainpkg.Main.getAppStage();
      private Scene scene;
      private Parent root;
     
     public void switchToScene1(ActionEvent event) throws IOException{//home screen
         Parent root = FXMLLoader.load(getClass().getResource("/Screens/Home_Screen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -32,7 +31,6 @@ public class Home_ScreenController {
     
     public void switchToScene2(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Screens/SingleMode_Screen.fxml"));
-        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -40,7 +38,6 @@ public class Home_ScreenController {
     
     public void switchTo2playerScreen(ActionEvent event) throws IOException{//switch to 2player screen
         Parent root = FXMLLoader.load(getClass().getResource("/Screens/TwoPlayerMode_Screen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -48,10 +45,9 @@ public class Home_ScreenController {
     
     public void switchToLogIn(ActionEvent event) throws IOException{//switch to Log in screen
         Parent root = FXMLLoader.load(getClass().getResource("/Screens/Login_Screen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-    
+     
 }

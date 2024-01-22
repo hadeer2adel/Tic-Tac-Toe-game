@@ -32,6 +32,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -43,7 +44,7 @@ import javafx.util.Duration;
  */
 public class Game_ScreenController implements Initializable {
 
-    private Stage stage;
+    private Stage stage = Mainpkg.Main.getAppStage();
     private Scene scene;
     private Parent root;
 
@@ -61,6 +62,38 @@ public class Game_ScreenController implements Initializable {
     private String[] gameboard = {"", "", "",
         "", "", "",
         "", "", "",};
+    @FXML
+    private StackPane stackPane1;
+    @FXML
+    private AnchorPane anchorPane1;
+    @FXML
+    private ImageView imag1;
+    @FXML
+    private ImageView imag2;
+    @FXML
+    private ImageView imag3;
+    @FXML
+    private Button btn_back;
+    @FXML
+    private Button btn_record;
+    @FXML
+    private Button btn1;
+    @FXML
+    private Button btn2;
+    @FXML
+    private Button btn3;
+    @FXML
+    private Button btn4;
+    @FXML
+    private Button btn5;
+    @FXML
+    private Button btn6;
+    @FXML
+    private Button btn7;
+    @FXML
+    private Button btn8;
+    @FXML
+    private Button btn9;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -79,6 +112,7 @@ public class Game_ScreenController implements Initializable {
         gameBtn = new Button[9];
     }
 
+    @FXML
     public void clickBtn1(ActionEvent event) {
         int n = 0;
         if (gameboard[n].equals("")) {
@@ -87,6 +121,7 @@ public class Game_ScreenController implements Initializable {
         }
     }
 
+    @FXML
     public void clickBtn2(ActionEvent event){
         int n = 1;
         if (gameboard[n].equals("")) {
@@ -95,6 +130,7 @@ public class Game_ScreenController implements Initializable {
         }
     }
 
+    @FXML
     public void clickBtn3(ActionEvent event){
         int n = 2;
         if (gameboard[n].equals("")) {
@@ -103,6 +139,7 @@ public class Game_ScreenController implements Initializable {
         }
     }
 
+    @FXML
     public void clickBtn4(ActionEvent event){
         int n = 3;
         if (gameboard[n].equals("")) {
@@ -111,6 +148,7 @@ public class Game_ScreenController implements Initializable {
         }
     }
 
+    @FXML
     public void clickBtn5(ActionEvent event){
         int n = 4;
         if (gameboard[n].equals("")) {
@@ -119,6 +157,7 @@ public class Game_ScreenController implements Initializable {
         }
     }
 
+    @FXML
     public void clickBtn6(ActionEvent event) {
         int n = 5;
         if (gameboard[n].equals("")) {
@@ -127,6 +166,7 @@ public class Game_ScreenController implements Initializable {
         }
     }
 
+    @FXML
     public void clickBtn7(ActionEvent event){
         int n = 6;
         if (gameboard[n].equals("")) {
@@ -135,6 +175,7 @@ public class Game_ScreenController implements Initializable {
         }
     }
 
+    @FXML
     public void clickBtn8(ActionEvent event){
         int n = 7;
         if (gameboard[n].equals("")) {
@@ -143,6 +184,7 @@ public class Game_ScreenController implements Initializable {
         }
     }
 
+    @FXML
     public void clickBtn9(ActionEvent event){
         int n = 8;
         if (gameboard[n].equals("")) {
@@ -249,9 +291,9 @@ public class Game_ScreenController implements Initializable {
         game = new GameDetails(player1, player2);
     }
 
+    @FXML
     public void switchTo2playermode(ActionEvent event) throws IOException {//Game Screen
         root = FXMLLoader.load(getClass().getResource("/Screens/TwoPlayerMode_Screen.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -263,7 +305,6 @@ public class Game_ScreenController implements Initializable {
         delay.setOnFinished(e -> {
             try {
                 root = FXMLLoader.load(getClass().getResource("/Screens/Video_Screen.fxml"));
-                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();

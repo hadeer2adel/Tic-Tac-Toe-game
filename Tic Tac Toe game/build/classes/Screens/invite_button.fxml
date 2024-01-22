@@ -9,10 +9,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="88.0" prefWidth="600.0" style="-fx-background-radius: 10px; -fx-background-color: linear-gradient(to bottom, darkblue, lightskyblue);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="cardHBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="565.0" style="-fx-background-radius: 10px; -fx-background-color: linear-gradient(to bottom, darkblue, lightskyblue);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screens.Invite_buttonController">
    <children>
-      <ImageView fitHeight="85.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="playerImg" fitHeight="80.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>
             <Insets left="10.0" />
          </HBox.margin>
@@ -25,20 +24,20 @@
             <Font name="System Bold Italic" size="22.0" />
          </font>
          <HBox.margin>
-            <Insets left="15.0" top="35.0" />
+            <Insets left="15.0" top="25.0" />
          </HBox.margin>
       </Label>
       <Circle fill="#1fff36" radius="10.0" stroke="BLACK" strokeType="INSIDE">
          <HBox.margin>
-            <Insets left="20.0" top="44.0" />
+            <Insets left="20.0" top="33.0" />
          </HBox.margin>
       </Circle>
-      <Button fx:id="btn_invite" mnemonicParsing="false" prefHeight="37.0" prefWidth="133.0" style="-fx-background-color: linear-gradient(to bottom, white, blue);" text="Invite">
+      <Button fx:id="btn_invite" mnemonicParsing="false" onAction="#invitation" prefHeight="37.0" prefWidth="115.0" style="-fx-background-color: linear-gradient(to bottom, white, blue);" text="Invite">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font>
          <HBox.margin>
-            <Insets left="250.0" top="30.0" />
+            <Insets left="250.0" top="22.0" />
          </HBox.margin>
       </Button>
    </children>

@@ -32,7 +32,7 @@ import javafx.stage.Stage;
 public class Video_ScreenController implements Initializable{
     //impement
 
-    private Stage stage;
+    private Stage stage = Mainpkg.Main.getAppStage();
     private Scene scene;
     private Parent root;
 
@@ -77,7 +77,6 @@ public class Video_ScreenController implements Initializable{
     public void switchToHome(ActionEvent event) throws IOException {//Home Screen
         mediaPlayer.stop();
         root = FXMLLoader.load(getClass().getResource("/Screens/Home_Screen.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -87,7 +86,6 @@ public class Video_ScreenController implements Initializable{
     public void switchToGameAgain(ActionEvent event) throws IOException {//Game Screen
         mediaPlayer.stop();
         root = FXMLLoader.load(getClass().getResource("/Screens/Game_Screen.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
