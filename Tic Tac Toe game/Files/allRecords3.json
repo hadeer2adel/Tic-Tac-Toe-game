@@ -1,1 +1,1 @@
-{"response":"allRecords","status":"success","records":[{"id":1,"name":"h vs s","steps":"x&0,o&4,x&3,o&1,x&6,"},{"id":2,"name":"h vs s","steps":"x&0,o&3,x&6,o&1,x&4,o&7,x&8,"}]}
+{"response":"allRecords","status":"success","records":[{"id":3,"name":"h vs s","steps":"x&0,o&4,x&3,o&7,x&6,"},{"id":4,"name":"h vs s","steps":"x&0,o&5,x&6,o&3,x&4,o&1,x&2,"},{"id":5,"name":"h vs s","steps":"x&0,o&2,x&4,o&6,x&8,"},{"id":6,"name":"h vs s","steps":"x&0,o&1,x&4,o&2,x&3,o&5,x&7,o&8,"},{"id":7,"name":"h vs s","steps":"x&1,o&2,x&3,o&4,x&0,o&6,"}]}

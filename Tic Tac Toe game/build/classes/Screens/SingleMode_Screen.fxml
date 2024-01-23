@@ -16,22 +16,17 @@
                   <Image url="@../Images/Rectangle%2012.png" />
                </image>
             </ImageView>
-            <Button fx:id="easy_btn" layoutX="200.0" layoutY="69.0" mnemonicParsing="false" onAction="#switchToPcGame" styleClass="large_btn" text="Easy">
+            <Button fx:id="easy_btn" layoutX="186.0" layoutY="142.0" mnemonicParsing="false" onAction="#switchToPcGame" styleClass="large_btn" text="Easy">
                <font>
                   <Font name="System Bold Italic" size="24.0" />
                </font>
             </Button>
-            <Button fx:id="medium_btn" layoutX="200.0" layoutY="168.0" mnemonicParsing="false" onAction="#switchToPcGameHard" styleClass="large_btn" text="Medium">
+            <Button fx:id="hard_btn" layoutX="186.0" layoutY="227.0" mnemonicParsing="false" onAction="#switchToPcGameHard" styleClass="large_btn" text="Hard">
                <font>
                   <Font name="System Bold Italic" size="24.0" />
                </font>
             </Button>
-            <Button fx:id="hard_btn" layoutX="200.0" layoutY="270.0" mnemonicParsing="false" onAction="#switchToPcGameHard" styleClass="large_btn" text="Hard">
-               <font>
-                  <Font name="System Bold Italic" size="24.0" />
-               </font>
-            </Button>
-            <Button fx:id="back_btn" mnemonicParsing="false" onAction="#switchTohome" styleClass="back_btn" text="Back">
+            <Button fx:id="back_btn" layoutX="23.0" layoutY="-12.0" mnemonicParsing="false" onAction="#switchTohome" styleClass="back_btn" text="Back">
                <font>
                   <Font name="System Bold Italic" size="20.0" />
                </font>

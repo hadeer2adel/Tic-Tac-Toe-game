@@ -5,40 +5,39 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="cardHBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="565.0" style="-fx-background-radius: 10px; -fx-background-color: linear-gradient(to bottom, darkblue, lightskyblue);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screens.Invite_buttonController">
+<HBox fx:id="cardHBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="82.0" prefWidth="513.0" style="-fx-background-radius: 10px; -fx-background-color: linear-gradient(to bottom, darkblue, lightskyblue);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screens.Invite_buttonController">
    <children>
-      <ImageView fx:id="playerImg" fitHeight="80.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="playerImg" fitHeight="80.0" fitWidth="64.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/vecteezy_young-man-anime_11484200%201.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="name" layoutX="81.0" layoutY="23.0" text="Sarah" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="22.0" />
+               </font>
+            </Label>
+            <Circle fill="#1fff36" layoutX="14.0" layoutY="14.0" radius="10.0" smooth="false" stroke="BLACK" strokeType="INSIDE" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="74.0" prefWidth="78.0">
+         <children>
+            <Button fx:id="btn_invite" layoutX="81.0" layoutY="19.0" mnemonicParsing="false" onAction="#invitation" prefHeight="32.0" prefWidth="107.0" style="-fx-background-color: linear-gradient(to bottom, white, blue);" text="Invite" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+            </Button>
+         </children>
          <HBox.margin>
-            <Insets left="10.0" />
+            <Insets left="75.0" />
          </HBox.margin>
-         <image>
-            <Image url="@../Images/vecteezy_young-man-anime_11484200%201.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="name" text="Sarah">
-         <font>
-            <Font name="System Bold Italic" size="22.0" />
-         </font>
-         <HBox.margin>
-            <Insets left="15.0" top="25.0" />
-         </HBox.margin>
-      </Label>
-      <Circle fill="#1fff36" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-         <HBox.margin>
-            <Insets left="20.0" top="33.0" />
-         </HBox.margin>
-      </Circle>
-      <Button fx:id="btn_invite" mnemonicParsing="false" onAction="#invitation" prefHeight="37.0" prefWidth="115.0" style="-fx-background-color: linear-gradient(to bottom, white, blue);" text="Invite">
-         <font>
-            <Font name="System Bold Italic" size="16.0" />
-         </font>
-         <HBox.margin>
-            <Insets left="250.0" top="22.0" />
-         </HBox.margin>
-      </Button>
+      </AnchorPane>
    </children>
 </HBox>

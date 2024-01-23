@@ -76,7 +76,6 @@ public class Online_Video_ScreenController implements Initializable {
         replay = 0;
         client = ConnectedClient.getClient();
         playerName.setText(lblPlayer);
-        updateScore();
         String path = "" ;
         switch (lblVideo) {
             case "win":
@@ -99,14 +98,15 @@ public class Online_Video_ScreenController implements Initializable {
     private void updateScore(){
         FileInputStream fis = null;
         FileWriter writer = null;
+        int myId = ConnectedClient.getClient().getId();
         try {
-            File f = new File("Files/playerData"+client.getId()+".json");
+            File f = new File("Files/playerData"+myId+".json");
             fis = new FileInputStream(f);
             JsonReader reader = Json.createReader(fis);
             JsonObject obj = reader.readObject();
             
             int score = obj.getInt("score");
-            if(client.getId() == game.getPlayerId_1())
+            if(myId == game.getPlayerId_1())
                 score += game.getPlayerScore_1();
             else
                 score += game.getPlayerScore_2();
@@ -191,6 +191,7 @@ public class Online_Video_ScreenController implements Initializable {
     
     public void openInvitationScreen() {
         try {
+            updateScore();
             root = FXMLLoader.load(getClass().getResource("/Screens/Invitation_Screen1.fxml"));
             scene = new Scene(root);
             stage.setScene(scene);

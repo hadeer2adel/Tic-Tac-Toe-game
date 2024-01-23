@@ -4,25 +4,6 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Invite_buttonController.java</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/DTO/UserData.java</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Record_CardController.java</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/DTO/Records.java</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Pc_GameController.java</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Records_ScreenController.java</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Invitation_Screen1Controller.java</file>
-        </group>
-        <group>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Invite_buttonController.java</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/PlayerInfo_ScreenController.java</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/DTO/UserData.java</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Record_CardController.java</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/DTO/Records.java</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Pc_GameController.java</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Records_ScreenController.java</file>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Invitation_Screen1Controller.java</file>
-        </group>
-        <group>
-            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Invite_buttonController.java</file>
             <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/PlayerInfo_ScreenController.java</file>
             <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/DTO/UserData.java</file>
             <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Record_CardController.java</file>
@@ -56,6 +37,26 @@
         </group>
         <group>
             <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Pc_GameController.java</file>
+        </group>
+        <group>
+            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Invite_buttonController.java</file>
+            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/DTO/UserData.java</file>
+            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Record_CardController.java</file>
+            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/DTO/Records.java</file>
+            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Pc_GameController.java</file>
+            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Records_ScreenController.java</file>
+            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/pc_game.css</file>
+            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Invitation_Screen1Controller.java</file>
+        </group>
+        <group>
+            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Invite_buttonController.java</file>
+            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/DTO/UserData.java</file>
+            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Record_CardController.java</file>
+            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/DTO/Records.java</file>
+            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Pc_GameController.java</file>
+            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Records_ScreenController.java</file>
+            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/pc_game.css</file>
+            <file>file:/E:/Project_Java/Tic-Tac-Toe-game/Tic%20Tac%20Toe%20game/src/Screens/Invitation_Screen1Controller.java</file>
         </group>
     </open-files>
 </project-private>

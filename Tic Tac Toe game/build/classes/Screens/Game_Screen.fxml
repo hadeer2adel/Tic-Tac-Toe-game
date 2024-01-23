@@ -29,12 +29,7 @@
                   <Image url="@../Images/vecteezy_anime-smiling-girl_11484071%201.png" />
                </image>
             </ImageView>
-            <Button fx:id="btn_back" layoutX="53.0" layoutY="347.0" mnemonicParsing="false" onAction="#switchTo2playermode" prefHeight="39.0" prefWidth="84.0" styleClass="btn_back" text="Back">
-               <font>
-                  <Font name="System Bold Italic" size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="btn_record" disable="true" layoutX="231.0" layoutY="347.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" styleClass="btn_Record" text="Record">
+            <Button fx:id="btn_back" layoutX="64.0" layoutY="347.0" mnemonicParsing="false" onAction="#switchTo2playermode" prefHeight="39.0" prefWidth="84.0" styleClass="btn_back" text="Back">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
                </font>

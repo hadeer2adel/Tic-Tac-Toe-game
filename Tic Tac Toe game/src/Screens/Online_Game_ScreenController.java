@@ -273,6 +273,10 @@ public class Online_Game_ScreenController implements Initializable {
             if(recorded){
                 beginconnect();
             }
+            if(ConnectedClient.getClient().getId() == game.getPlayerId_1())
+                game.updatePlayerScore_2();
+            else
+                game.updatePlayerScore_1();
             Online_Video_ScreenController.setData("You Lose", "loss", game);
             try {
                 switchToVideoScreen();
@@ -428,8 +432,26 @@ public class Online_Game_ScreenController implements Initializable {
         });
         delay.play();
     }
-   
-    public static void setJson (JsonObject jo){
-        Response_ScreenController.jsonObject = jo;
-    }
+    
+    public void onCancel(ActionEvent event) throws IOException{
+        client = ConnectedClient.getClient();
+        if(client.isServerConnected()){
+            if(client.getId() == game.getPlayerId_1())
+                client.sendCancel(game.getPlayerId_2(),game.getPlayerName_2(),game.getPlayerScore_1(),game.getPlayerScore_2());
+            else
+                client.sendCancel(game.getPlayerId_1(),game.getPlayerName_1(),game.getPlayerScore_2(),game.getPlayerScore_1());
+            
+            root = FXMLLoader.load(getClass().getResource("/Screens/Invitation_Screen1.fxml"));
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Server");
+            alert.setHeaderText(null);
+            alert.setContentText("Server is OFF now");
+            alert.showAndWait();
+        }
+    } 
 }
