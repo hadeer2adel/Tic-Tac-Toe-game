@@ -64,6 +64,9 @@ public class Invite_buttonController {
 
     public void openWaitScreen() {
         try {
+            String player = btn_invite.getId();
+            String [] playerData = player.split(",");
+            WaitMessage_ScreenController.setData(Integer.parseInt(playerData[0]),playerData[1]);
             root = FXMLLoader.load(getClass().getResource("/Screens/WaitMessage_Screen.fxml"));
             scene = new Scene(root);
             stage.setScene(scene);

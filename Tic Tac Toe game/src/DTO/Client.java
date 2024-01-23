@@ -5,6 +5,7 @@
  */
 package DTO;
 
+import Mainpkg.Main;
 import Screens.Game_ScreenController;
 import Screens.Invitation_Screen1Controller;
 import Screens.Invite_buttonController;
@@ -35,7 +36,11 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -100,7 +105,7 @@ public class Client implements Runnable {
                 }
 
             } catch (IOException ex) {
-                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                stop();
             }
         }
     }
@@ -108,11 +113,22 @@ public class Client implements Runnable {
     public void stop() {
         try {
             id = -1;
-            thread.stop();
             server.close();
             server = null;
             connectedServer = false;
             ConnectedClient.setClient(null);
+            Platform.runLater(()->{
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("/Screens/Home_Screen.fxml"));
+                    Scene scene = new Scene(root);
+                    Stage stage = Main.getAppStage();
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException ex1) {
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+            });
+            //thread.stop();
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -168,6 +184,9 @@ public class Client implements Runnable {
                 break;
             case "playAgain":
                 receivePlayAgain(requestJson);
+                break;
+            case "cancel":
+                receiveCancel(requestJson);
                 break;
             default:
                 System.out.println("Unknown response type: " + requestJson);
@@ -501,4 +520,40 @@ public class Client implements Runnable {
         }
     }
         
+    public void sendCancel(int id2, String name2, int score1, int score2) {
+        opSuccess = false;
+        try {
+            JsonReader reader = Json.createReader(new FileInputStream(new File("Files/playerData"+id+".json")));
+            JsonObject player1 = reader.readObject();
+            int id1 = player1.getInt("id");
+            String name1 = player1.getString("name");
+
+            JsonObject requestJson = Json.createObjectBuilder()
+                    .add("request", "cancel")
+                    .add("id1", id1)
+                    .add("id2", id2)
+                    .add("name1", name1)
+                    .add("name2", name2)
+                    .add("score1", score1)
+                    .add("score2", score2)
+                    .build();
+
+            mouth.writeUTF(requestJson.toString());
+            mouth.flush();
+            
+            Platform.runLater(() -> {
+                WaitMessage_ScreenController controller = new WaitMessage_ScreenController();
+                controller.openCancelScreen(requestJson);
+            });
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void receiveCancel(JsonObject requestJson) {
+        Platform.runLater(() -> {
+            WaitMessage_ScreenController controller = new WaitMessage_ScreenController();
+            controller.openCancelScreen(requestJson);
+        });
+    }
 }

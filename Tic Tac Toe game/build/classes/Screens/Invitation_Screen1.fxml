@@ -8,18 +8,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
 <Pane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screens.Invitation_Screen1Controller">
-=======
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Screens.Invitation_Screen1Controller">
->>>>>>> UpdatePc
    <children>
       <ImageView fx:id="Imag1" fitHeight="407.0" fitWidth="608.0" layoutY="-7.0" pickOnBounds="true">
          <image>
             <Image url="@../Images/Rectangle%2012.png" />
          </image>
       </ImageView>
-<<<<<<< HEAD
       <ListView fx:id="onlinePlayersListview" layoutX="26.0" layoutY="67.0" prefHeight="266.0" prefWidth="549.0" styleClass="scroll-bar" />
       <Button fx:id="btn_back" alignment="CENTER" layoutX="34.0" layoutY="347.0" mnemonicParsing="false" onAction="#switchToHome" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #FCD015; -fx-background-radius: 20px;" text="LogOut">
          <font>
@@ -27,31 +22,15 @@
          </font>
       </Button>
       <Button fx:id="btnProfile" alignment="CENTER" layoutX="428.0" layoutY="347.0" mnemonicParsing="false" onAction="#switchToProfile" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #FCD015; -fx-background-radius: 20px;" text="Profile">
-=======
-      <Button fx:id="btn_back" alignment="BOTTOM_LEFT" layoutX="41.0" layoutY="355.0" mnemonicParsing="false" onAction="#switchTologin" style="-fx-background-color: #FCD015; -fx-background-radius: 10px;" text="Back">
->>>>>>> UpdatePc
          <font>
             <Font name="System Bold Italic" size="17.0" />
          </font>
       </Button>
-<<<<<<< HEAD
       <Label fx:id="onlinePlayersLabel" layoutX="46.0" layoutY="36.0" prefHeight="31.0" prefWidth="166.0" text="Available Players" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="17.0" />
          </font>
       </Label>
       <Button fx:id="refreshBtn" alignment="CENTER" layoutX="478.0" layoutY="16.0" mnemonicParsing="false" onAction="#refresh" prefHeight="40.0" prefWidth="42.0" style="-fx-background-color: CRIMSON; -fx-background-radius: 20;" />
-=======
-      <ScrollPane layoutX="23.0" layoutY="89.0" prefHeight="256.0" prefWidth="560.0" style="-fx-background-radius: 10px;">
-         <content>
-            <VBox prefHeight="256.0" prefWidth="541.0" style="-fx-background-radius: 10px;" />
-         </content>
-      </ScrollPane>
-      <Button fx:id="btnProfile" layoutX="274.0" layoutY="358.0" mnemonicParsing="false" onAction="#switchToProfile" style="-fx-background-color: #FCD015; -fx-background-radius: 10px;" text="Profile">
-         <font>
-            <Font name="System Bold Italic" size="15.0" />
-         </font>
-      </Button>
->>>>>>> UpdatePc
    </children>
 </Pane>

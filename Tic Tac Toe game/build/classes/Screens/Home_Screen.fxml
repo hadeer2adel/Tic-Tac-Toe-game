@@ -13,22 +13,22 @@
             <Image url="@../Images/Rectangle%2012.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="171.0" fitWidth="353.0" layoutX="124.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="171.0" fitWidth="353.0" layoutX="124.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/img2-removebg-preview%20(1).png" />
          </image>
       </ImageView>
-      <Button fx:id="btn_single" layoutX="234.0" layoutY="154.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="62.0" prefWidth="126.0" style="-fx-background-color: #FCD015; -fx-background-radius: 30px;" text="Single">
+      <Button fx:id="btn_single" layoutX="209.0" layoutY="184.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="47.0" prefWidth="184.0" style="-fx-background-color: #FCD015; -fx-background-radius: 30px;" text="Single">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btn_2player" layoutX="234.0" layoutY="233.0" mnemonicParsing="false" onAction="#switchTo2playerScreen" prefHeight="62.0" prefWidth="126.0" style="-fx-background-color: #FCD015; -fx-background-radius: 30px;" text="2 Player">
+      <Button fx:id="btn_2player" layoutX="209.0" layoutY="247.0" mnemonicParsing="false" onAction="#switchTo2playerScreen" prefHeight="47.0" prefWidth="184.0" style="-fx-background-color: #FCD015; -fx-background-radius: 30px;" text="2 Player">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btn_online" layoutX="234.0" layoutY="313.0" mnemonicParsing="false" onAction="#switchToLogIn" prefHeight="62.0" prefWidth="126.0" style="-fx-background-color: #FCD015; -fx-background-radius: 30px;" text="Online">
+      <Button fx:id="btn_online" layoutX="209.0" layoutY="310.0" mnemonicParsing="false" onAction="#switchToLogIn" prefHeight="47.0" prefWidth="184.0" style="-fx-background-color: #FCD015; -fx-background-radius: 30px;" text="Online">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font>
