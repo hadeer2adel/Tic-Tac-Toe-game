@@ -20,6 +20,14 @@ This is a desktop-based Tic Tac Toe game that allows two players to compete agai
   <li>Update the score after each game for winner (3 Points) and draw (1 Point for each).</li>
   <li>User profile: user name and score.</li>
 </ul>
+<h2>Server Side Features</h2>
+<ul>
+  <li>User Management: The server application maintains a list of all registered users.</li>
+  <li>Player Status: The server application can track the status of each player, whether they are online, offline, or currently in a game.</li>
+  <li>Server Management: The server application can be closed and reopened as needed.</li>
+  <li>Player Status Pie Chart: The server application features a pie chart that shows the current status of all players, including those who are online, offline, or in a game.This provides an easy-to-read visualization of the current state of the system.</li>
+</ul>
+
 
 <h2>Installation</h2>
 <ul>
