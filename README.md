@@ -38,5 +38,9 @@ This is a desktop-based Tic Tac Toe game that allows two players to compete agai
  <li>Can Run the compiled JAR file: java -jar TicTacToeClient.jar</li>
  <li>client and server both run on the same machine if you want to run them on different machines one small change should be made and it's to change the connection ip in the Client            project in a class called Constant.java (IP_ADDRESS) from 127.0.0.1 to the ip of the machine which the server is runing on.</li>
   
-<h3>Libraries Used:</h3>
+<h2>Libraries Used:</h2>
 <li>JSON: to handle Requests and Responses between client and server.</li>
+
+<h2>Check Server Repository</h2>
+<li>https://github.com/hadeer2adel/Tic-Tac-Toe-server</li>
+
