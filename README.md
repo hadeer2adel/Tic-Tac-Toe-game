@@ -17,7 +17,7 @@ This is a desktop-based Tic Tac Toe game that allows two players to compete agai
   <li>Available Players List: to send invitation.</li>
   <li>Real-Time Updates: Immediate updates on the game board for both players.</li>
   <li>Recording Game: to make game history for each player.</li>
-  <li>Update the score after each game for winner (3 Points) and draw (1 Point for each).</li>
+  <li>Update the score after each game for winner (1 Points).</li>
   <li>User profile: user name and score.</li>
 </ul>
 <h2>Server Side Features</h2>
